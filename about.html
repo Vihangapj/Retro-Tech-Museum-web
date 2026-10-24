@@ -47,13 +47,13 @@
 
       <div class="header-controls">
         <button id="btn-toggle-theme" class="ctrl-btn" title="Cycle Retro Themes">
-          🎨 <span id="current-theme-label">CYBER 1984</span>
+          🎨 <span id="current-theme-label" class="ctrl-label">CYBER 1984</span>
         </button>
         <button id="btn-toggle-crt" class="ctrl-btn active" title="Toggle CRT Scanline">
-          📺 CRT: ON
+          📺 <span class="ctrl-label">CRT: ON</span>
         </button>
         <button id="btn-toggle-sfx" class="ctrl-btn active" title="Toggle Sound Effects">
-          🔊 SFX: ON
+          🔊 <span class="ctrl-label">SFX: ON</span>
         </button>
         <button class="mobile-toggle" aria-label="Toggle navigation menu">
           ☰
@@ -99,7 +99,7 @@
     </section>
 
     <!-- Pioneer Women in Computing Hall of Fame -->
-    <section style="margin-bottom: 70px;">
+    <section id="pioneers" style="margin-bottom: 70px;">
       <div class="section-header">
         <div>
           <span class="pixel-badge pixel-badge-yellow">HALL OF HONOR</span>
@@ -111,7 +111,7 @@
       <div class="exhibits-grid">
         <!-- Pioneer 1: Ada Lovelace -->
         <article class="pixel-box pioneer-card">
-          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px;">
+          <div class="pioneer-header">
             <span class="pixel-badge pixel-badge-yellow">1815 - 1852</span>
             <span style="font-family: var(--font-pixel-condensed); font-size: 0.75rem; color: var(--secondary);">FIRST PROGRAMMER</span>
           </div>
@@ -129,7 +129,7 @@
 
         <!-- Pioneer 2: Grace Hopper -->
         <article class="pixel-box pioneer-card">
-          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px;">
+          <div class="pioneer-header">
             <span class="pixel-badge pixel-badge-pink">1906 - 1992</span>
             <span style="font-family: var(--font-pixel-condensed); font-size: 0.75rem; color: var(--primary);">MOTHER OF COMPILERS</span>
           </div>
@@ -147,7 +147,7 @@
 
         <!-- Pioneer 3: Margaret Hamilton -->
         <article class="pixel-box pioneer-card">
-          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px;">
+          <div class="pioneer-header">
             <span class="pixel-badge pixel-badge-yellow">1936 - PRESENT</span>
             <span style="font-family: var(--font-pixel-condensed); font-size: 0.75rem; color: var(--accent);">APOLLO FLIGHT DIRECTOR</span>
           </div>

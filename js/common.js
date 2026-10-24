@@ -198,11 +198,11 @@ function initCrtToggle() {
     crtOverlay.classList.add('disabled');
     if (crtBtn) {
       crtBtn.classList.remove('active');
-      crtBtn.innerHTML = '📺 CRT: OFF';
+      crtBtn.innerHTML = '📺 <span class="ctrl-label">CRT: OFF</span>';
     }
   } else if (crtBtn) {
     crtBtn.classList.add('active');
-    crtBtn.innerHTML = '📺 CRT: ON';
+    crtBtn.innerHTML = '📺 <span class="ctrl-label">CRT: ON</span>';
   }
 
   if (crtBtn && crtOverlay) {
@@ -210,7 +210,7 @@ function initCrtToggle() {
       const isDisabled = crtOverlay.classList.toggle('disabled');
       localStorage.setItem('retro_crt_enabled', !isDisabled);
       crtBtn.classList.toggle('active', !isDisabled);
-      crtBtn.innerHTML = !isDisabled ? '📺 CRT: ON' : '📺 CRT: OFF';
+      crtBtn.innerHTML = !isDisabled ? '📺 <span class="ctrl-label">CRT: ON</span>' : '📺 <span class="ctrl-label">CRT: OFF</span>';
 
       window.showRetroToast(!isDisabled ? 'CRT SCANLINES: ENABLED' : 'CRT SCANLINES: DISABLED', '📺');
       if (window.retroAudio) window.retroAudio.playBlip();
@@ -227,12 +227,12 @@ function initAudioControls() {
   if (sfxBtn) {
     const isEnabled = window.retroAudio.soundEnabled;
     sfxBtn.classList.toggle('active', isEnabled);
-    sfxBtn.innerHTML = isEnabled ? '🔊 SFX: ON' : '🔈 SFX: OFF';
+    sfxBtn.innerHTML = isEnabled ? '🔊 <span class="ctrl-label">SFX: ON</span>' : '🔈 <span class="ctrl-label">SFX: OFF</span>';
 
     sfxBtn.addEventListener('click', () => {
       const state = window.retroAudio.toggleSound();
       sfxBtn.classList.toggle('active', state);
-      sfxBtn.innerHTML = state ? '🔊 SFX: ON' : '🔈 SFX: OFF';
+      sfxBtn.innerHTML = state ? '🔊 <span class="ctrl-label">SFX: ON</span>' : '🔈 <span class="ctrl-label">SFX: OFF</span>';
       window.showRetroToast(state ? '8-BIT SFX: ENABLED' : '8-BIT SFX: MUTED', state ? '🔊' : '🔈');
     });
   }

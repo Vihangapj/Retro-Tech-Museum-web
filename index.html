@@ -53,13 +53,13 @@
       <!-- Hardware & Shader Controls -->
       <div class="header-controls">
         <button id="btn-toggle-theme" class="ctrl-btn" title="Cycle Retro Color Palettes">
-          🎨 <span id="current-theme-label">CYBER 1984</span>
+          🎨 <span id="current-theme-label" class="ctrl-label">CYBER 1984</span>
         </button>
         <button id="btn-toggle-crt" class="ctrl-btn active" title="Toggle CRT Scanline Shader">
-          📺 CRT: ON
+          📺 <span class="ctrl-label">CRT: ON</span>
         </button>
         <button id="btn-toggle-sfx" class="ctrl-btn active" title="Toggle 8-Bit Audio Effects">
-          🔊 SFX: ON
+          🔊 <span class="ctrl-label">SFX: ON</span>
         </button>
         <button class="mobile-toggle" aria-label="Toggle navigation menu">
           ☰
@@ -238,19 +238,19 @@
     </section>
 
     <!-- Pioneer Women in Tech Highlight -->
-    <section class="pixel-box pixel-box-pink" style="margin: 50px 0; background: #140d25;">
-      <div style="display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 30px; align-items: center;">
-        <div>
+    <section class="pixel-box pixel-box-pink pioneer-highlight-section">
+      <div class="pioneer-highlight-grid">
+        <div class="pioneer-content-col">
           <span class="pixel-badge pixel-badge-yellow" style="margin-bottom: 12px;">SPECIAL TRIBUTE WING</span>
-          <h2 class="glow-text-pink" style="font-size: 1.5rem; margin-bottom: 14px;">WOMEN COMPUTING PIONEERS</h2>
-          <p style="font-family: var(--font-tech); font-size: 1.05rem; line-height: 1.6; margin-bottom: 20px; color: var(--text-main);">
+          <h2 class="glow-text-pink pioneer-title">WOMEN COMPUTING PIONEERS</h2>
+          <p class="pioneer-desc">
             Before silicon chips, visionary women wrote the mathematical foundations of software. Discover Ada Lovelace's first algorithm in 1843, Rear Admiral Grace Hopper's first English-language compiler, and Margaret Hamilton's Apollo 11 flight software.
           </p>
-          <a href="about.html" class="pixel-btn pixel-btn-secondary">
+          <a href="about.html#pioneers" class="pixel-btn pixel-btn-secondary pioneer-btn">
             VISIT PIONEER GALLERY & QUIZ ►
           </a>
         </div>
-        <div style="background: #000; border: 3px solid var(--secondary); padding: 18px; font-family: var(--font-terminal); font-size: 1.2rem; color: #ff007f;">
+        <div class="pioneer-terminal-card">
           <p>/* APOLLO 11 GUIDANCE SOFTWARE */</p>
           <p style="color: #ffe600;">DIR: MARGARET_HAMILTON</p>
           <p style="color: #00ffcc;">YEAR: 1969</p>
