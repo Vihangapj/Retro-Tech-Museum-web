@@ -74,6 +74,18 @@ function initByteDefenderGame() {
 
   // Input Listeners
   window.addEventListener('keydown', (e) => {
+    // Prevent hijacking keyboard input when typing in inputs, textareas, selects, editable elements, or within the DOS terminal
+    if (
+      e.target &&
+      (
+        ['INPUT', 'TEXTAREA', 'SELECT'].includes(e.target.tagName) ||
+        e.target.isContentEditable ||
+        (e.target.closest && e.target.closest('#terminal'))
+      )
+    ) {
+      return;
+    }
+
     if (['ArrowLeft', 'KeyA'].includes(e.code)) player.movingLeft = true;
     if (['ArrowRight', 'KeyD'].includes(e.code)) player.movingRight = true;
     if (e.code === 'Space') {
@@ -87,8 +99,27 @@ function initByteDefenderGame() {
   });
 
   window.addEventListener('keyup', (e) => {
+    if (
+      e.target &&
+      (
+        ['INPUT', 'TEXTAREA', 'SELECT'].includes(e.target.tagName) ||
+        e.target.isContentEditable ||
+        (e.target.closest && e.target.closest('#terminal'))
+      )
+    ) {
+      return;
+    }
     if (['ArrowLeft', 'KeyA'].includes(e.code)) player.movingLeft = false;
     if (['ArrowRight', 'KeyD'].includes(e.code)) player.movingRight = false;
+  });
+
+  // Clicking on canvas starts the game or fires laser
+  canvas.addEventListener('click', () => {
+    if (gameState === 'START' || gameState === 'GAMEOVER') {
+      startGame();
+    } else if (gameState === 'PLAYING') {
+      shootLaser();
+    }
   });
 
   // Touch / Mobile Onscreen Buttons
@@ -453,34 +484,61 @@ C:\\RETRO_TECH> _
     }
   };
 
-  terminalInput.addEventListener('keydown', (e) => {
-    if (e.key === 'Enter') {
-      const inputLine = terminalInput.value.trim();
-      terminalInput.value = '';
-      if (!inputLine) return;
-
-      appendOutput(`C:\\RETRO_TECH> ${inputLine}`);
-
-      const parts = inputLine.split(' ');
-      const cmd = parts[0].toLowerCase();
-      const arg = parts.slice(1).join(' ').toLowerCase();
-
-      if (cmd === 'type') {
-        handleTypeCommand(arg);
-      } else if (COMMANDS[inputLine.toLowerCase()]) {
-        const res = COMMANDS[inputLine.toLowerCase()]();
-        if (res) appendOutput(res);
-      } else if (COMMANDS[cmd]) {
-        const res = COMMANDS[cmd]();
-        if (res) appendOutput(res);
-      } else {
-        appendOutput(`'${cmd}' is not recognized as an internal or external command.\nType 'HELP' for a directory of operations.`);
-        if (window.retroAudio) window.retroAudio.playBlip();
+  // Focus terminal input when clicking inside the DOS terminal window
+  const terminalWindow = document.querySelector('.dos-terminal-window');
+  if (terminalWindow) {
+    terminalWindow.addEventListener('click', (e) => {
+      if (window.getSelection && window.getSelection().toString().length === 0) {
+        terminalInput.focus();
       }
+    });
+  }
 
-      // Auto scroll to bottom
-      terminalOutput.scrollTop = terminalOutput.scrollHeight;
+  function executeCommandLine(rawInput) {
+    const inputLine = (rawInput || '').trim();
+    if (!inputLine) return;
+
+    appendOutput(`C:\\RETRO_TECH> ${inputLine}`);
+
+    const parts = inputLine.split(' ');
+    const cmd = parts[0].toLowerCase();
+    const arg = parts.slice(1).join(' ').toLowerCase();
+
+    if (cmd === 'type') {
+      handleTypeCommand(arg);
+    } else if (COMMANDS[inputLine.toLowerCase()]) {
+      const res = COMMANDS[inputLine.toLowerCase()]();
+      if (res) appendOutput(res);
+    } else if (COMMANDS[cmd]) {
+      const res = COMMANDS[cmd]();
+      if (res) appendOutput(res);
+    } else {
+      appendOutput(`'${cmd}' is not recognized as an internal or external command.\nType 'HELP' for a directory of operations.`);
+      if (window.retroAudio) window.retroAudio.playBlip();
     }
+
+    // Auto scroll to bottom
+    terminalOutput.scrollTop = terminalOutput.scrollHeight;
+  }
+
+  // Global helper for quick command buttons
+  window.runDosCommand = (cmd) => {
+    executeCommandLine(cmd);
+    terminalInput.focus();
+  };
+
+  terminalInput.addEventListener('keydown', (e) => {
+    // Explicitly stop propagation so Space, arrows, and other keys never reach the arcade game
+    e.stopPropagation();
+
+    if (e.key === 'Enter') {
+      executeCommandLine(terminalInput.value);
+      terminalInput.value = '';
+    }
+  });
+
+  terminalInput.addEventListener('keyup', (e) => {
+    e.stopPropagation();
   });
 
   function appendOutput(text) {

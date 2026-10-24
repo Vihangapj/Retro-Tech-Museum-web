@@ -5,6 +5,7 @@
 
 document.addEventListener('DOMContentLoaded', () => {
   initRetroPreloader();
+  initPageTransitions();
   initThemes();
   initCrtToggle();
   initAudioControls();
@@ -16,8 +17,18 @@ document.addEventListener('DOMContentLoaded', () => {
   createToastContainer();
 });
 
+// Helper: Check if current page is the 1st page (Home / index.html)
+function isFirstPage() {
+  const path = window.location.pathname.toLowerCase().replace(/\\/g, '/');
+  const filename = path.substring(path.lastIndexOf('/') + 1);
+  return filename === '' || filename === 'index.html';
+}
+
 /* --- RETRO SYSTEM BOOT PRELOADER --- */
 function initRetroPreloader() {
+  // Only display preloader on the 1st page (index.html). Other pages transition smoothly.
+  if (!isFirstPage()) return;
+
   let preloader = document.getElementById('retro-preloader');
   if (!preloader) {
     preloader = document.createElement('div');
@@ -63,9 +74,16 @@ function initRetroPreloader() {
   const ramStages = ['64 KB', '128 KB', '256 KB', '512 KB', '640 KB'];
   let dismissed = false;
 
+  const onPreloaderKey = (e) => {
+    if (e.key === 'Escape' || e.key === ' ' || e.key === 'Enter') {
+      dismissPreloader();
+    }
+  };
+
   const dismissPreloader = () => {
     if (dismissed) return;
     dismissed = true;
+    document.removeEventListener('keydown', onPreloaderKey);
     preloader.classList.add('loaded');
     if (window.retroAudio) window.retroAudio.playBootChime();
     setTimeout(() => {
@@ -77,11 +95,7 @@ function initRetroPreloader() {
     skipBtn.addEventListener('click', dismissPreloader);
   }
   preloader.addEventListener('click', dismissPreloader);
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' || e.key === ' ' || e.key === 'Enter') {
-      dismissPreloader();
-    }
-  });
+  document.addEventListener('keydown', onPreloaderKey);
 
   const interval = setInterval(() => {
     pct += Math.floor(Math.random() * 16) + 12;
@@ -365,5 +379,55 @@ function initModals() {
         document.body.style.overflow = '';
       });
     }
+  });
+}
+
+/* --- SMOOTH PAGE TRANSITIONS --- */
+function initPageTransitions() {
+  document.addEventListener('click', (e) => {
+    const link = e.target.closest('a');
+    if (!link) return;
+
+    const href = link.getAttribute('href');
+    if (!href) return;
+
+    // Ignore anchors, javascript:, mailto:, tel:
+    if (href.startsWith('#') || href.startsWith('javascript:') || href.startsWith('mailto:') || href.startsWith('tel:')) {
+      return;
+    }
+
+    // Ignore external target or download links
+    if (link.target === '_blank' || link.hasAttribute('download')) {
+      return;
+    }
+
+    // Ignore modifier clicks (open in new tab/window)
+    if (e.ctrlKey || e.metaKey || e.shiftKey || e.altKey) {
+      return;
+    }
+
+    // Check same origin
+    try {
+      const url = new URL(link.href, window.location.href);
+      if (url.origin !== window.location.origin) return;
+
+      // If same page with hash anchor, allow smooth scroll
+      if (url.pathname === window.location.pathname && url.hash) return;
+
+      // Smoothly fade page out before navigating
+      e.preventDefault();
+      document.body.classList.add('page-transitioning');
+
+      setTimeout(() => {
+        window.location.href = link.href;
+      }, 160);
+    } catch (err) {
+      // Fallback to normal browser navigation
+    }
+  });
+
+  // Remove transition class if restored via back/forward cache
+  window.addEventListener('pageshow', () => {
+    document.body.classList.remove('page-transitioning');
   });
 }

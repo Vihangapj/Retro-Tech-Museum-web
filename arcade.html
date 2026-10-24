@@ -185,13 +185,13 @@ Try 'TYPE GIRLS_HIGH_SCHOOL_KANDY.TXT' to read the special exhibition tribute!
       <!-- Quick Command Buttons for Easy Clicking -->
       <div style="margin-top: 14px; display: flex; gap: 8px; flex-wrap: wrap;">
         <span style="font-family: var(--font-pixel); font-size: 0.65rem; color: var(--text-muted); align-self: center; margin-right: 6px;">QUICK COMMANDS:</span>
-        <button class="pixel-btn pixel-btn-sm pixel-btn-outline" onclick="document.getElementById('terminal-cli-input').value='help'; document.getElementById('terminal-cli-input').dispatchEvent(new KeyboardEvent('keydown', {'key':'Enter'}));">HELP</button>
-        <button class="pixel-btn pixel-btn-sm pixel-btn-outline" onclick="document.getElementById('terminal-cli-input').value='dir'; document.getElementById('terminal-cli-input').dispatchEvent(new KeyboardEvent('keydown', {'key':'Enter'}));">DIR</button>
-        <button class="pixel-btn pixel-btn-sm pixel-btn-outline" onclick="document.getElementById('terminal-cli-input').value='type archive_mission.txt'; document.getElementById('terminal-cli-input').dispatchEvent(new KeyboardEvent('keydown', {'key':'Enter'}));">TYPE MISSION.TXT</button>
-        <button class="pixel-btn pixel-btn-sm pixel-btn-outline" onclick="document.getElementById('terminal-cli-input').value='boot c64'; document.getElementById('terminal-cli-input').dispatchEvent(new KeyboardEvent('keydown', {'key':'Enter'}));">BOOT C64</button>
-        <button class="pixel-btn pixel-btn-sm pixel-btn-outline" onclick="document.getElementById('terminal-cli-input').value='matrix'; document.getElementById('terminal-cli-input').dispatchEvent(new KeyboardEvent('keydown', {'key':'Enter'}));">MATRIX</button>
-        <button class="pixel-btn pixel-btn-sm pixel-btn-outline" onclick="document.getElementById('terminal-cli-input').value='play'; document.getElementById('terminal-cli-input').dispatchEvent(new KeyboardEvent('keydown', {'key':'Enter'}));">PLAY</button>
-        <button class="pixel-btn pixel-btn-sm pixel-btn-outline" onclick="document.getElementById('terminal-cli-input').value='cls'; document.getElementById('terminal-cli-input').dispatchEvent(new KeyboardEvent('keydown', {'key':'Enter'}));">CLS</button>
+        <button class="pixel-btn pixel-btn-sm pixel-btn-outline" onclick="window.runDosCommand('help')">HELP</button>
+        <button class="pixel-btn pixel-btn-sm pixel-btn-outline" onclick="window.runDosCommand('dir')">DIR</button>
+        <button class="pixel-btn pixel-btn-sm pixel-btn-outline" onclick="window.runDosCommand('type archive_mission.txt')">TYPE MISSION.TXT</button>
+        <button class="pixel-btn pixel-btn-sm pixel-btn-outline" onclick="window.runDosCommand('boot c64')">BOOT C64</button>
+        <button class="pixel-btn pixel-btn-sm pixel-btn-outline" onclick="window.runDosCommand('matrix')">MATRIX</button>
+        <button class="pixel-btn pixel-btn-sm pixel-btn-outline" onclick="window.runDosCommand('play')">PLAY</button>
+        <button class="pixel-btn pixel-btn-sm pixel-btn-outline" onclick="window.runDosCommand('cls')">CLS</button>
       </div>
     </section>
   </main>
