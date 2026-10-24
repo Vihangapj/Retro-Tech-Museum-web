@@ -4,6 +4,7 @@
  */
 
 document.addEventListener('DOMContentLoaded', () => {
+  document.body.classList.remove('page-transitioning');
   initRetroPreloader();
   initPageTransitions();
   initThemes();
@@ -15,7 +16,67 @@ document.addEventListener('DOMContentLoaded', () => {
   initModals();
   initBackToTop();
   createToastContainer();
+  initUXEnhancements();
 });
+
+/* --- OVERALL UX: scroll progress, header state, reveal-on-scroll --- */
+function initUXEnhancements() {
+  // Scroll progress bar
+  let bar = document.getElementById('scroll-progress');
+  if (!bar) {
+    bar = document.createElement('div');
+    bar.id = 'scroll-progress';
+    bar.setAttribute('aria-hidden', 'true');
+    document.body.appendChild(bar);
+  }
+
+  const header = document.querySelector('.retro-header');
+  let ticking = false;
+
+  function onScroll() {
+    const doc = document.documentElement;
+    const max = doc.scrollHeight - window.innerHeight;
+    const pct = max > 0 ? Math.min(1, window.scrollY / max) : 0;
+    bar.style.transform = 'scaleX(' + pct + ')';
+    if (header) header.classList.toggle('is-scrolled', window.scrollY > 10);
+    ticking = false;
+  }
+
+  window.addEventListener('scroll', () => {
+    if (!ticking) {
+      ticking = true;
+      window.requestAnimationFrame(onScroll);
+    }
+  }, { passive: true });
+  onScroll();
+
+  // Reveal-on-scroll for static content blocks
+  const reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (reduceMotion || !('IntersectionObserver' in window)) return;
+
+  const targets = document.querySelectorAll(
+    '.section-header, main section > .pixel-box, .stat-card, .pioneer-card, .timeline-item, .retro-audio-deck, .exhibit-card, .pioneer-highlight-section'
+  );
+
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (!entry.isIntersecting) return;
+      const el = entry.target;
+      el.classList.add('in');
+      io.unobserve(el);
+      // Clean up so hover transforms on cards keep working
+      setTimeout(() => el.classList.remove('reveal', 'in'), 800);
+    });
+  }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+
+  targets.forEach((el) => {
+    const rect = el.getBoundingClientRect();
+    // Don't hide what's already visible on load (avoids flash)
+    if (rect.top < window.innerHeight * 0.9) return;
+    el.classList.add('reveal');
+    io.observe(el);
+  });
+}
 
 // Helper: Check if current page is the 1st page (Home / index.html)
 function isFirstPage() {
@@ -382,8 +443,36 @@ function initModals() {
   });
 }
 
-/* --- SMOOTH PAGE TRANSITIONS --- */
+/* --- SMOOTH RETRO PAGE TRANSITIONS (CRT Beam & Bus Transfer) --- */
 function initPageTransitions() {
+  let transitionOverlay = document.getElementById('retro-page-transition');
+  if (!transitionOverlay) {
+    transitionOverlay = document.createElement('div');
+    transitionOverlay.id = 'retro-page-transition';
+    transitionOverlay.setAttribute('aria-hidden', 'true');
+    transitionOverlay.innerHTML = `
+      <div class="transition-beam"></div>
+      <div class="transition-badge">
+        <span class="transition-spinner">◐</span>
+        <span class="transition-text">SYSTEM BUS TRANSFER...</span>
+      </div>
+    `;
+    document.body.appendChild(transitionOverlay);
+  }
+
+  // Dismiss overlay when page loads or is restored from back/forward cache
+  const hideOverlay = () => {
+    if (transitionOverlay) {
+      transitionOverlay.classList.remove('active');
+    }
+  };
+
+  window.addEventListener('pageshow', hideOverlay);
+  // Ensure overlay is hidden after current page paint
+  requestAnimationFrame(() => {
+    setTimeout(hideOverlay, 30);
+  });
+
   document.addEventListener('click', (e) => {
     const link = e.target.closest('a');
     if (!link) return;
@@ -414,20 +503,22 @@ function initPageTransitions() {
       // If same page with hash anchor, allow smooth scroll
       if (url.pathname === window.location.pathname && url.hash) return;
 
-      // Smoothly fade page out before navigating
+      // If clicking the current URL itself, avoid redundant transitions
+      if (url.pathname === window.location.pathname && !url.search && !url.hash) return;
+
+      // Activate CRT beam and data bus transfer overlay
       e.preventDefault();
-      document.body.classList.add('page-transitioning');
+      transitionOverlay.classList.add('active');
+
+      if (window.retroAudio && typeof window.retroAudio.playBlip === 'function') {
+        window.retroAudio.playBlip();
+      }
 
       setTimeout(() => {
         window.location.href = link.href;
-      }, 160);
+      }, 180);
     } catch (err) {
       // Fallback to normal browser navigation
     }
-  });
-
-  // Remove transition class if restored via back/forward cache
-  window.addEventListener('pageshow', () => {
-    document.body.classList.remove('page-transitioning');
   });
 }

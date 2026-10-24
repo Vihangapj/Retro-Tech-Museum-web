@@ -7,34 +7,6 @@
   <meta name="description" content="Explore our extensive collection of historic computers, gaming consoles, telecommunication devices, and magnetic media storage from 1970 to 1995.">
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
   <link rel="stylesheet" href="css/style.css">
-  <style>
-    .filter-bar {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-      margin-bottom: 24px;
-      align-items: center;
-    }
-    .filter-pill-btn {
-      font-family: var(--font-pixel);
-      font-size: 0.65rem;
-      padding: 10px 16px;
-      background: #000;
-      border: 2px solid var(--primary);
-      color: var(--primary);
-      cursor: pointer;
-      transition: all 0.15s ease;
-    }
-    .filter-pill-btn:hover, .filter-pill-btn.active {
-      background: var(--primary);
-      color: #000;
-      box-shadow: 0 0 10px var(--primary-glow);
-    }
-    .search-wrap {
-      flex-grow: 1;
-      min-width: 260px;
-    }
-  </style>
 </head>
 <body>
   <div id="crt-overlay" aria-hidden="true"></div>
@@ -74,15 +46,9 @@
       </nav>
 
       <div class="header-controls">
-        <button id="btn-toggle-theme" class="ctrl-btn" title="Cycle Retro Themes">
-          🎨 <span id="current-theme-label" class="ctrl-label">CYBER 1984</span>
-        </button>
-        <button id="btn-toggle-crt" class="ctrl-btn active" title="Toggle CRT Scanline">
-          📺 <span class="ctrl-label">CRT: ON</span>
-        </button>
-        <button id="btn-toggle-sfx" class="ctrl-btn active" title="Toggle Sound Effects">
-          🔊 <span class="ctrl-label">SFX: ON</span>
-        </button>
+        <div id="header-user-auth" class="header-auth-container">
+          <!-- Populated dynamically by js/auth.js -->
+        </div>
         <button class="mobile-toggle" aria-label="Toggle navigation menu">
           ☰
         </button>
@@ -160,9 +126,9 @@
   </main>
 
   <!-- Detailed Artifact Modal Dialog -->
-  <div class="pixel-modal-backdrop" id="artifact-detail-modal" role="dialog" aria-modal="true">
+  <div class="pixel-modal-backdrop" id="artifact-detail-modal" role="dialog" aria-modal="true" aria-labelledby="artifact-modal-body">
     <div class="pixel-modal">
-      <button class="modal-close-btn" aria-label="Close modal">✕</button>
+      <button class="modal-close-btn" onclick="window.closeArtifactModal()" aria-label="Close modal">✕</button>
       <div id="artifact-modal-body">
         <!-- Injected dynamically by js/exhibits.js -->
       </div>
@@ -219,6 +185,7 @@
   </footer>
 
   <script src="js/audio.js"></script>
+  <script src="js/auth.js"></script>
   <script src="js/common.js"></script>
   <script src="js/exhibits.js"></script>
 </body>

@@ -308,15 +308,15 @@ window.openArtifactModal = function(id) {
   if (!modal || !modalContent) return;
 
   modalContent.innerHTML = `
-    <!-- Top Image View with Toggle -->
-    <div style="position: relative; margin-bottom: 20px; border: 4px solid var(--border-dark); overflow: hidden; background: #000; box-shadow: 4px 4px 0 0 #000;">
-      <img id="modal-real-img" src="${item.realImage}" alt="${item.name}" style="width: 100%; max-height: 320px; object-fit: cover; display: block;">
-      <div id="modal-svg-wrap" style="display: none; padding: 30px; min-height: 240px; align-items: center; justify-content: center; background: #07050e;">
-        <div style="width: 180px; height: 140px; margin: 0 auto; display: flex; align-items: center; justify-content: center;">
+    <!-- Top Image View with Responsive Toggle -->
+    <div class="modal-img-container">
+      <img id="modal-real-img" src="${item.realImage}" alt="${item.name}" class="modal-real-img">
+      <div id="modal-svg-wrap" class="modal-svg-wrap" style="display: none;">
+        <div class="modal-svg-inner">
           ${getArtifactSvg(item.id)}
         </div>
       </div>
-      <div style="position: absolute; bottom: 10px; right: 10px; display: flex; gap: 8px;">
+      <div class="modal-view-toggle-bar">
         <button id="btn-modal-view-photo" class="pixel-btn pixel-btn-sm" onclick="switchModalView(true)">
           📷 REAL PHOTO
         </button>
@@ -326,46 +326,58 @@ window.openArtifactModal = function(id) {
       </div>
     </div>
 
-    <div style="text-align: center; margin-bottom: 20px;">
-      <span class="pixel-badge pixel-badge-yellow" style="margin-bottom: 6px;">ORIGINAL LAUNCH: ${item.year}</span>
-      <h2 class="glow-text-cyan" style="font-size: 1.4rem; margin-top: 8px;">${item.name}</h2>
-      <p style="color: var(--secondary); font-family: var(--font-pixel-condensed); font-size: 0.85rem;">Designed by ${item.creator}</p>
+    <div class="modal-header-meta">
+      <span class="pixel-badge pixel-badge-yellow">ORIGINAL LAUNCH: ${item.year}</span>
+      <h2 class="glow-text-cyan modal-item-title">${item.name}</h2>
+      <p class="modal-item-author">Designed by ${item.creator}</p>
     </div>
 
-    <div class="pixel-box" style="background: #0d0a1a; margin-bottom: 20px; border-color: var(--secondary);">
-      <h4 class="glow-text-pink" style="font-size: 0.8rem; margin-bottom: 12px;">HARDWARE SPECIFICATIONS:</h4>
-      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; font-family: var(--font-tech); font-size: 0.95rem;">
-        <div><strong>PROCESSOR:</strong> ${item.specs.cpu || 'N/A'}</div>
-        <div><strong>MEMORY:</strong> ${item.specs.ram || 'N/A'}</div>
-        <div><strong>GRAPHICS/DISPLAY:</strong> ${item.specs.graphics || item.specs.screen || 'N/A'}</div>
-        <div><strong>SOUND CHIP:</strong> ${item.specs.sound || 'Mono Output'}</div>
-        <div style="grid-column: 1 / -1;"><strong>ORIGINAL LAUNCH PRICE:</strong> ${item.specs.originalPrice}</div>
+    <div class="pixel-box modal-specs-box">
+      <h4 class="glow-text-pink modal-specs-heading">HARDWARE SPECIFICATIONS:</h4>
+      <div class="modal-specs-grid">
+        <div class="modal-spec-item"><strong>PROCESSOR:</strong> <span>${item.specs.cpu || 'N/A'}</span></div>
+        <div class="modal-spec-item"><strong>MEMORY:</strong> <span>${item.specs.ram || 'N/A'}</span></div>
+        <div class="modal-spec-item"><strong>GRAPHICS/DISPLAY:</strong> <span>${item.specs.graphics || item.specs.screen || 'N/A'}</span></div>
+        <div class="modal-spec-item"><strong>SOUND CHIP:</strong> <span>${item.specs.sound || 'Mono Output'}</span></div>
+        <div class="modal-spec-item modal-spec-full"><strong>ORIGINAL LAUNCH PRICE:</strong> <span>${item.specs.originalPrice}</span></div>
       </div>
     </div>
 
-    <div style="margin-bottom: 16px;">
-      <h4 class="glow-text-cyan" style="font-size: 0.8rem; margin-bottom: 8px;">HISTORICAL SIGNIFICANCE:</h4>
-      <p style="font-family: var(--font-tech); line-height: 1.5; color: var(--text-main);">${item.description}</p>
+    <div class="modal-section-block">
+      <h4 class="glow-text-cyan modal-section-title">HISTORICAL SIGNIFICANCE:</h4>
+      <p class="modal-section-desc">${item.description}</p>
     </div>
 
-    <div style="margin-bottom: 24px;">
-      <p style="font-family: var(--font-tech); color: var(--accent); border-left: 3px solid var(--accent); padding-left: 12px; font-style: italic;">
+    <div class="modal-quote-block">
+      <p class="modal-quote-text">
         "${item.significance}"
       </p>
     </div>
 
-    <div style="display: flex; gap: 12px; justify-content: flex-end; flex-wrap: wrap;">
+    <div class="modal-actions-bar">
       <button class="pixel-btn pixel-btn-accent" onclick="triggerArtifactSound('${item.soundType}')">
         🔊 TEST HARDWARE SOUND
       </button>
-      <button class="pixel-btn pixel-btn-outline" onclick="document.getElementById('artifact-detail-modal').classList.remove('open')">
+      <button class="pixel-btn pixel-btn-outline" onclick="window.closeArtifactModal()">
         CLOSE
       </button>
     </div>
   `;
 
   modal.classList.add('open');
+  document.body.style.overflow = 'hidden';
+  const innerModal = modal.querySelector('.pixel-modal');
+  if (innerModal) innerModal.scrollTop = 0;
   if (window.retroAudio) window.retroAudio.playCoin();
+};
+
+window.closeArtifactModal = function() {
+  const modal = document.getElementById('artifact-detail-modal');
+  if (modal) {
+    modal.classList.remove('open');
+  }
+  document.body.style.overflow = '';
+  if (window.retroAudio) window.retroAudio.playBlip();
 };
 
 window.switchModalView = function(showPhoto) {

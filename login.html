@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Operative Authentication & Clearance Gate | Retro Tech Museum</title>
+  <meta name="description" content="Sign in to your Retro Tech Museum operative account or test quick demo accounts to access VIP archives, save high scores, and customize museum passes.">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <!-- CRT Scanline & Phosphor Overlay -->
+  <div id="crt-overlay" aria-hidden="true"></div>
+
+  <!-- Perspective Horizon Grid Line -->
+  <div class="cyber-horizon" aria-hidden="true"></div>
+
+  <!-- Top Realtime Vintage Ticker -->
+  <div class="retro-ticker-bar">
+    <div class="ticker-content">
+      <span class="ticker-tag">SECURITY CLEARANCE GATE</span>
+      <span>★ TERMINAL AUTHORIZATION SYSTEM V3.30 ★ ENTER OPERATIVE CREDENTIALS OR SELECT QUICK DEMO ACCESS ★ ENCRYPTED 640K BASE MEMORY ★ PRESERVING COMPUTING HERITAGE SINCE 1984 ★</span>
+    </div>
+  </div>
+
+  <!-- Global Retro Navigation Bar (Floating Sci-Fi Island Header) -->
+  <header class="retro-header">
+    <div class="nav-container">
+      <a href="index.html" class="retro-logo">
+        <div class="logo-icon">
+          <svg viewBox="0 0 24 24">
+            <path d="M4 2h13l3 3v15H4V2zm2 2v6h10V4H6zm0 10v6h12v-6H6zm2 2h8v2H8v-2z"/>
+          </svg>
+        </div>
+        <div class="logo-text">
+          <span class="logo-title">RETRO<span>TECH</span></span>
+          <span class="logo-subtitle">MUSEUM ARCHIVE</span>
+        </div>
+      </a>
+
+      <!-- Desktop & Mobile Nav Menu -->
+      <nav>
+        <ul class="nav-menu">
+          <li class="nav-item"><a href="index.html">LOBBY</a></li>
+          <li class="nav-item"><a href="exhibits.html">EXHIBITS</a></li>
+          <li class="nav-item"><a href="arcade.html">ARCADE & DOS</a></li>
+          <li class="nav-item"><a href="visit.html">VISIT & TICKETS</a></li>
+          <li class="nav-item"><a href="about.html">ABOUT & QUIZ</a></li>
+        </ul>
+      </nav>
+
+      <!-- Right Side Auth Island & Mobile Navigation Toggle -->
+      <div class="header-controls">
+        <div id="header-user-auth" class="header-auth-container">
+          <!-- Populated dynamically by js/auth.js -->
+        </div>
+        <button class="mobile-toggle" aria-label="Toggle navigation menu">
+          ☰
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Login Page Content -->
+  <main class="page-container">
+    <div class="section-header" style="margin-top: 10px;">
+      <div>
+        <span class="pixel-badge pixel-badge-yellow" style="margin-bottom: 8px;">SECURITY CLEARANCE CHECK</span>
+        <h1 class="section-title" style="font-size: 1.8rem;">OPERATIVE AUTHENTICATION GATE</h1>
+        <p class="section-subtitle">Authorize your digital session to access VIP archive sectors, store interactive tickets, and record arcade scores.</p>
+      </div>
+      <div>
+        <span class="pixel-badge pixel-badge-pink">TERMINAL ID: TR-1984-ONLINE</span>
+      </div>
+    </div>
+
+    <!-- Main Auth Card Container -->
+    <div class="login-terminal-wrapper">
+      <div class="pixel-box login-terminal-box">
+        <!-- Terminal Bezel Top Bar -->
+        <div class="terminal-bezel-top">
+          <div class="terminal-led-group">
+            <span class="terminal-led led-green" title="Power OK"></span>
+            <span class="terminal-led led-yellow" title="Encryption Active"></span>
+            <span class="terminal-led led-red" title="Buffer Busy"></span>
+          </div>
+          <span class="terminal-sys-tag glow-text-cyan">MOS 6502 CRYPTO CORE // 64K RAM</span>
+        </div>
+
+        <!-- Mode Switcher Tabs -->
+        <div class="auth-tabs-row">
+          <button type="button" class="auth-tab-btn active" id="tab-btn-login">
+            🔑 OPERATIVE SIGN-IN
+          </button>
+          <button type="button" class="auth-tab-btn" id="tab-btn-register">
+            ⚡ NEW RECRUIT ENROLLMENT
+          </button>
+        </div>
+
+        <!-- Tab 1: Login Form -->
+        <form id="form-retro-login" class="auth-active-form">
+          <div class="ticket-form-group">
+            <label class="ticket-form-label" for="login-handle">OPERATIVE CODENAME / HANDLE:</label>
+            <input 
+              type="text" 
+              id="login-handle" 
+              class="pixel-input" 
+              placeholder="e.g. ADA_LOVELACE or RETRO_HACKER" 
+              required 
+              maxlength="30"
+              autocomplete="username"
+            >
+          </div>
+
+          <div class="ticket-form-group">
+            <label class="ticket-form-label" for="login-passcode">SECURITY PASSCODE:</label>
+            <input 
+              type="password" 
+              id="login-passcode" 
+              class="pixel-input" 
+              placeholder="••••••••••••" 
+              required 
+              maxlength="30"
+              autocomplete="current-password"
+            >
+          </div>
+
+          <div class="auth-form-options">
+            <label class="retro-checkbox-label">
+              <input type="checkbox" id="login-remember" checked>
+              <span>REMEMBER TERMINAL SESSION</span>
+            </label>
+            <span style="font-family: var(--font-pixel-condensed); font-size: 0.7rem; color: var(--text-muted);">
+              DEFAULT PASS: ANY VALUE (DEMO SAFE)
+            </span>
+          </div>
+
+          <button type="submit" class="pixel-btn pixel-btn-accent auth-submit-btn">
+            ⚡ AUTHORIZE CLEARANCE & SIGN IN ►
+          </button>
+        </form>
+
+        <!-- Tab 2: Registration Form (Hidden by default) -->
+        <form id="form-retro-register" style="display: none;">
+          <div class="ticket-form-group">
+            <label class="ticket-form-label" for="reg-handle">CHOSEN OPERATIVE HANDLE:</label>
+            <input 
+              type="text" 
+              id="reg-handle" 
+              class="pixel-input" 
+              placeholder="e.g. CYBER_PIONEER_2026" 
+              required 
+              maxlength="24"
+            >
+          </div>
+
+          <div class="ticket-form-group">
+            <label class="ticket-form-label" for="reg-passcode">NEW PASSCODE:</label>
+            <input 
+              type="password" 
+              id="reg-passcode" 
+              class="pixel-input" 
+              placeholder="Create security code..." 
+              required 
+              maxlength="30"
+            >
+          </div>
+
+          <div class="ticket-form-group">
+            <label class="ticket-form-label" for="reg-clearance">ASSIGNED CLEARANCE TIER:</label>
+            <select id="reg-clearance" class="pixel-select">
+              <option value="LEVEL 2: SCHOLAR">LEVEL 2: SILICON SCHOLAR</option>
+              <option value="LEVEL 3: HACKER">LEVEL 3: VINTAGE HARDWARE HACKER</option>
+              <option value="LEVEL 4: ARCHITECT">LEVEL 4: SOFTWARE ARCHITECT</option>
+              <option value="LEVEL 1: EXPLORER">LEVEL 1: STUDENT EXPLORER</option>
+            </select>
+          </div>
+
+          <div class="ticket-form-group">
+            <label class="ticket-form-label" for="reg-rig">PRIMARY RETRO MACHINE:</label>
+            <select id="reg-rig" class="pixel-select">
+              <option value="Commodore 64 (SID Synth)">COMMODORE 64 (SID SYNTH)</option>
+              <option value="Apple IIe (MOS 6502)">APPLE IIe (MOS 6502)</option>
+              <option value="IBM PC 5150 (MS-DOS)">IBM PC 5150 (MS-DOS)</option>
+              <option value="Nintendo Game Boy (DMG-01)">NINTENDO GAME BOY (DMG-01)</option>
+              <option value="Sony Walkman TPS-L2">SONY WALKMAN TPS-L2</option>
+            </select>
+          </div>
+
+          <button type="submit" class="pixel-btn pixel-btn-secondary auth-submit-btn">
+            💾 ENROLL NEW RECRUIT INTO ARCHIVE ►
+          </button>
+        </form>
+
+        <!-- Instant 1-Click Quick Demo Login Section -->
+        <div class="auth-demo-section">
+          <div class="auth-demo-header">
+            <span class="pixel-badge pixel-badge-pink">INSTANT DEMO ACCESS</span>
+            <span class="glow-text-cyan" style="font-family: var(--font-pixel); font-size: 0.65rem;">
+              ONE-CLICK HISTORICAL PROFILES:
+            </span>
+          </div>
+
+          <div class="auth-demo-grid">
+            <button type="button" class="auth-demo-pill" onclick="handleQuickDemo('ada')">
+              <span class="demo-icon">👑</span>
+              <div class="demo-text">
+                <strong>ADA LOVELACE</strong>
+                <small>First Software Architect</small>
+              </div>
+            </button>
+
+            <button type="button" class="auth-demo-pill" onclick="handleQuickDemo('grace')">
+              <span class="demo-icon">⚡</span>
+              <div class="demo-text">
+                <strong>GRACE HOPPER</strong>
+                <small>Compiler Pioneer</small>
+              </div>
+            </button>
+
+            <button type="button" class="auth-demo-pill" onclick="handleQuickDemo('margaret')">
+              <span class="demo-icon">🚀</span>
+              <div class="demo-text">
+                <strong>MARGARET HAMILTON</strong>
+                <small>Apollo 11 Flight Lead</small>
+              </div>
+            </button>
+
+            <button type="button" class="auth-demo-pill" onclick="handleQuickDemo('arcade')">
+              <span class="demo-icon">👾</span>
+              <div class="demo-text">
+                <strong>BYTE DEFENDER</strong>
+                <small>Arcade Hi-Score Operative</small>
+              </div>
+            </button>
+
+            <button type="button" class="auth-demo-pill" onclick="handleQuickDemo('student')">
+              <span class="demo-icon">🎓</span>
+              <div class="demo-text">
+                <strong>KANDY SCHOLAR</strong>
+                <small>Girls High School Explorer</small>
+              </div>
+            </button>
+          </div>
+        </div>
+
+        <!-- Terminal Diagnostic Log Screen -->
+        <div class="terminal-log-console">
+          <div class="log-console-title glow-text-yellow">AUTHENTICATION DIAGNOSTICS LOG:</div>
+          <pre id="auth-log-stream">> WAITING FOR OPERATIVE KEYSTROKE INPUT...
+> SECURITY MATRIX: SECURE ENCLAVE ACTIVE
+> SYSTEM READY FOR ACCESS VALIDATION.</pre>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Global Retro Footer -->
+  <footer class="retro-footer">
+    <div class="footer-container">
+      <div class="footer-col">
+        <h4 class="glow-text-cyan">RETRO TECH MUSEUM</h4>
+        <p style="font-size: 0.95rem; color: var(--text-muted); margin-bottom: 16px; max-width: 380px;">
+          Preserving early personal computers, arcade electronics, and magnetic media to inspire future generations of computer scientists and software engineers.
+        </p>
+        <span class="school-tribute-badge">Official Digital Tech Archive</span>
+      </div>
+
+      <div class="footer-col">
+        <h4>NAVIGATION</h4>
+        <ul class="footer-links">
+          <li><a href="index.html">► Museum Lobby</a></li>
+          <li><a href="exhibits.html">► Silicon Exhibits</a></li>
+          <li><a href="arcade.html">► 1984 Arcade & DOS</a></li>
+          <li><a href="visit.html">► Tickets & Floor Map</a></li>
+          <li><a href="about.html">► Pioneers & Quiz</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>COMMUNITY</h4>
+        <ul class="footer-links">
+          <li><a href="visit.html#guestbook">► Sign Guestbook</a></li>
+          <li><a href="arcade.html#terminal">► DOS Terminal CLI</a></li>
+          <li><a href="about.html#quiz">► Tech Trivia Exam</a></li>
+          <li><a href="login.html">► Operative Clearance Gate</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>SYSTEM STATUS</h4>
+        <div style="background: #000; border: 2px solid var(--border-dark); padding: 12px; font-family: var(--font-terminal); font-size: 1.15rem; color: #33ff33;">
+          <p>CPU: MOS 6502 @ 1.02 MHz</p>
+          <p>AUTH GATE: ENCRYPTED</p>
+          <p>BUFFER: 640 KB BASE OK</p>
+          <p>DIAGNOSTICS: PASS</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div>&copy; 1984 - 2026 Retro Tech Museum Archive. All rights reserved.</div>
+      <div>Designed with authentic HTML/CSS/JS & Web Audio Synthesizer.</div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="js/audio.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/common.js"></script>
+
+  <!-- Login Page Controller Script -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const tabLogin = document.getElementById('tab-btn-login');
+      const tabRegister = document.getElementById('tab-btn-register');
+      const formLogin = document.getElementById('form-retro-login');
+      const formRegister = document.getElementById('form-retro-register');
+      const logStream = document.getElementById('auth-log-stream');
+
+      function appendLog(line) {
+        if (!logStream) return;
+        logStream.textContent += '\n> ' + line;
+        logStream.scrollTop = logStream.scrollHeight;
+      }
+
+      // Tab Switching
+      tabLogin.addEventListener('click', () => {
+        tabLogin.classList.add('active');
+        tabRegister.classList.remove('active');
+        formLogin.style.display = 'block';
+        formRegister.style.display = 'none';
+        appendLog('SWITCHED TO OPERATIVE SIGN-IN TERMINAL');
+        if (window.retroAudio) window.retroAudio.playBlip();
+      });
+
+      tabRegister.addEventListener('click', () => {
+        tabRegister.classList.add('active');
+        tabLogin.classList.remove('active');
+        formRegister.style.display = 'block';
+        formLogin.style.display = 'none';
+        appendLog('SWITCHED TO NEW RECRUIT ENROLLMENT PROTOCOL');
+        if (window.retroAudio) window.retroAudio.playBlip();
+      });
+
+      // Handle Sign-in Submission
+      formLogin.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const handle = document.getElementById('login-handle').value;
+        const pass = document.getElementById('login-passcode').value;
+
+        appendLog(`VALIDATING CHECKSUM FOR [${handle.toUpperCase()}]...`);
+        appendLog('INTERROGATING 640K BASE REPOSITORIES: SUCCESS');
+
+        const user = RetroAuth.login(handle, pass);
+        appendLog(`CLEARANCE CONFIRMED. WELCOME ABOARD, ${user.handle}!`);
+
+        setTimeout(() => {
+          window.location.href = 'index.html';
+        }, 650);
+      });
+
+      // Handle Registration Submission
+      formRegister.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const handle = document.getElementById('reg-handle').value;
+        const pass = document.getElementById('reg-passcode').value;
+        const clearance = document.getElementById('reg-clearance').value;
+        const rig = document.getElementById('reg-rig').value;
+
+        appendLog(`ENROLLING NEW RECRUIT [${handle.toUpperCase()}]...`);
+        appendLog(`ASSIGNING CLEARANCE: ${clearance}`);
+        appendLog(`MOUNTING RIG: ${rig}`);
+
+        const user = RetroAuth.register({ handle, password: pass, clearance, rig });
+        appendLog(`REGISTRATION SECURED. SESSION ACTIVE!`);
+
+        setTimeout(() => {
+          window.location.href = 'index.html';
+        }, 650);
+      });
+
+      // If user is already logged in, show current status in log
+      const cur = RetroAuth.getCurrentUser();
+      if (cur) {
+        appendLog(`NOTICE: ACTIVE OPERATIVE [${cur.handle}] ALREADY LOGGED IN.`);
+        appendLog(`CURRENT CLEARANCE: ${cur.clearance}`);
+      }
+    });
+
+    // Helper for 1-Click Demo Logins
+    window.handleQuickDemo = function(key) {
+      const logStream = document.getElementById('auth-log-stream');
+      if (logStream) {
+        logStream.textContent += `\n> EXECUTING INSTANT DEMO CLEARANCE FOR [${key.toUpperCase()}]...`;
+      }
+      const user = RetroAuth.quickDemoLogin(key);
+      if (logStream) {
+        logStream.textContent += `\n> WELCOME, ${user.handle}! REDIRECTING TO ARCHIVE LOBBY...`;
+      }
+      setTimeout(() => {
+        window.location.href = 'index.html';
+      }, 550);
+    };
+  </script>
+</body>
+</html>

@@ -46,15 +46,9 @@
       </nav>
 
       <div class="header-controls">
-        <button id="btn-toggle-theme" class="ctrl-btn" title="Cycle Retro Themes">
-          🎨 <span id="current-theme-label" class="ctrl-label">CYBER 1984</span>
-        </button>
-        <button id="btn-toggle-crt" class="ctrl-btn active" title="Toggle CRT Scanline">
-          📺 <span class="ctrl-label">CRT: ON</span>
-        </button>
-        <button id="btn-toggle-sfx" class="ctrl-btn active" title="Toggle Sound Effects">
-          🔊 <span class="ctrl-label">SFX: ON</span>
-        </button>
+        <div id="header-user-auth" class="header-auth-container">
+          <!-- Populated dynamically by js/auth.js -->
+        </div>
         <button class="mobile-toggle" aria-label="Toggle navigation menu">
           ☰
         </button>
@@ -74,7 +68,7 @@
 
     <!-- Museum Origin & Curatorial Mission -->
     <section class="pixel-box" style="margin-bottom: 60px; background: #0c091f; border-color: var(--secondary);">
-      <div style="display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 30px; align-items: center;">
+      <div class="mission-grid">
         <div>
           <span class="pixel-badge pixel-badge-yellow" style="margin-bottom: 10px;">PRESERVATION & EDUCATION</span>
           <h2 class="glow-text-cyan" style="font-size: 1.3rem; margin-bottom: 14px;">OUR CURATORIAL MISSION</h2>
@@ -299,6 +293,7 @@
   </footer>
 
   <script src="js/audio.js"></script>
+  <script src="js/auth.js"></script>
   <script src="js/common.js"></script>
   <script src="js/about.js"></script>
 </body>
