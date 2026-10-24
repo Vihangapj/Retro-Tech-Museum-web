@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Plan Your Visit & 8-Bit Ticket Generator | Retro Tech Museum</title>
+  <meta name="description" content="Design your customized 8-bit retro admission ticket, explore our interactive museum floor map, and sign the official visitor guestbook.">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div id="crt-overlay" aria-hidden="true"></div>
+  <div class="cyber-horizon" aria-hidden="true"></div>
+
+  <!-- Top Realtime Ticker -->
+  <div class="retro-ticker-bar">
+    <div class="ticker-content">
+      <span class="ticker-tag">VISITOR SERVICES</span>
+      <span>★ PLAN YOUR JOURNEY THROUGH RETRO COMPUTING ★ CUSTOM 8-BIT TICKETS PRINTABLE AS PNG ★ INTERACTIVE EXHIBIT SECTORS ★ VISIT KANDY, SRI LANKA ★ SPECIAL GUESTBOOK ARCHIVE ONLINE ★</span>
+    </div>
+  </div>
+
+  <!-- Global Retro Navigation Bar -->
+  <header class="retro-header">
+    <div class="nav-container">
+      <a href="index.html" class="retro-logo">
+        <div class="logo-icon">
+          <svg viewBox="0 0 24 24">
+            <path d="M4 2h13l3 3v15H4V2zm2 2v6h10V4H6zm0 10v6h12v-6H6zm2 2h8v2H8v-2z"/>
+          </svg>
+        </div>
+        <div class="logo-text">
+          <span class="logo-title">RETRO<span>TECH</span></span>
+          <span class="logo-subtitle">MUSEUM ARCHIVE</span>
+        </div>
+      </a>
+
+      <nav>
+        <ul class="nav-menu">
+          <li class="nav-item"><a href="index.html">LOBBY</a></li>
+          <li class="nav-item"><a href="exhibits.html">EXHIBITS</a></li>
+          <li class="nav-item"><a href="arcade.html">ARCADE & DOS</a></li>
+          <li class="nav-item"><a href="visit.html" class="active">VISIT & TICKETS</a></li>
+          <li class="nav-item"><a href="about.html">ABOUT & QUIZ</a></li>
+        </ul>
+      </nav>
+
+      <div class="header-controls">
+        <button id="btn-toggle-theme" class="ctrl-btn" title="Cycle Retro Themes">
+          🎨 <span id="current-theme-label">CYBER 1984</span>
+        </button>
+        <button id="btn-toggle-crt" class="ctrl-btn active" title="Toggle CRT Scanline">
+          📺 CRT: ON
+        </button>
+        <button id="btn-toggle-sfx" class="ctrl-btn active" title="Toggle Sound Effects">
+          🔊 SFX: ON
+        </button>
+        <button class="mobile-toggle" aria-label="Toggle navigation menu">
+          ☰
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="page-container">
+    <!-- Header -->
+    <div class="section-header">
+      <div>
+        <span class="pixel-badge pixel-badge-yellow" style="margin-bottom: 8px;">VISITOR DESK & TICKETING</span>
+        <h1 class="section-title" style="font-size: 1.8rem;">PLAN YOUR RETRO EXPEDITION</h1>
+        <p class="section-subtitle">Generate a custom pixelated admission ticket, explore the floor layout, and leave a permanent mark in our guestbook.</p>
+      </div>
+    </div>
+
+    <!-- 1. Interactive 8-Bit Ticket Generator Section -->
+    <section id="tickets" style="margin-bottom: 70px;">
+      <div style="margin-bottom: 24px;">
+        <h2 class="glow-text-cyan" style="font-size: 1.3rem; margin-bottom: 8px;">1. CUSTOM 8-BIT TICKET BOOTH</h2>
+        <p style="color: var(--text-muted); font-size: 0.95rem;">
+          Configure your digital admission ticket below. Your pass is rendered live on an HTML5 canvas and can be saved as a high-resolution PNG image!
+        </p>
+      </div>
+
+      <div class="ticket-creator-grid">
+        <!-- Form Controls -->
+        <div class="pixel-box" style="border-color: var(--primary);">
+          <div class="ticket-form-group">
+            <label class="ticket-form-label" for="ticket-name">VISITOR CODENAME / NAME:</label>
+            <input type="text" id="ticket-name" class="pixel-input" value="ADA ENTHUSIAST" maxlength="24">
+          </div>
+
+          <div class="ticket-form-group">
+            <label class="ticket-form-label" for="ticket-type">ADMISSION TIER:</label>
+            <select id="ticket-type" class="pixel-select">
+              <option value="Student Explorer">STUDENT EXPLORER (STUDENT PASS)</option>
+              <option value="VIP Byte Hacker">VIP BYTE HACKER (ALL SECTORS)</option>
+              <option value="Silicon Scholar">SILICON SCHOLAR PASS</option>
+              <option value="Retro Guild Member">RETRO GUILD MEMBER</option>
+            </select>
+          </div>
+
+          <div class="ticket-form-group">
+            <label class="ticket-form-label" for="ticket-date">EXPEDITION DATE:</label>
+            <input type="date" id="ticket-date" class="pixel-input">
+          </div>
+
+          <div class="ticket-form-group">
+            <label class="ticket-form-label" for="ticket-device">FAVORITE RETRO MACHINE:</label>
+            <select id="ticket-device" class="pixel-select">
+              <option value="Commodore 64">COMMODORE 64</option>
+              <option value="Apple IIe">APPLE IIe</option>
+              <option value="Game Boy DMG-01">NINTENDO GAME BOY</option>
+              <option value="Sony Walkman">SONY WALKMAN TPS-L2</option>
+              <option value="IBM PC 5150">IBM PERSONAL COMPUTER 5150</option>
+              <option value="NES Famicom">NINTENDO NES 8-BIT</option>
+            </select>
+          </div>
+
+          <div style="display: flex; gap: 10px; margin-top: 10px;">
+            <button id="btn-generate-ticket" class="pixel-btn pixel-btn-accent" style="flex: 1;">
+              ⚡ REFRESH PASS
+            </button>
+            <button id="btn-download-ticket" class="pixel-btn pixel-btn-secondary" style="flex: 1;">
+              💾 DOWNLOAD PNG
+            </button>
+          </div>
+        </div>
+
+        <!-- Live Canvas Preview -->
+        <div class="ticket-preview-box">
+          <canvas id="ticketCanvas" width="620" height="260"></canvas>
+          <p style="margin-top: 16px; font-family: var(--font-pixel-condensed); font-size: 0.75rem; color: var(--accent);">
+            ▲ LIVE RENDERED VINTAGE DOT-MATRIX PASS (CLICK DOWNLOAD TO SAVE) ▲
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. Interactive Floor Map Section -->
+    <section id="floormap" style="margin-bottom: 70px;">
+      <div class="section-header">
+        <div>
+          <span class="pixel-badge pixel-badge-pink">NAVIGATION GRID</span>
+          <h2 class="section-title">INTERACTIVE MUSEUM FLOOR PLAN</h2>
+      <!-- Quick Mobile Sector Switcher Chips -->
+      <div class="mobile-sector-chips">
+        <button class="pixel-btn pixel-btn-sm" onclick="selectSector('z1')">01. MAINFRAME</button>
+        <button class="pixel-btn pixel-btn-sm pixel-btn-secondary" onclick="selectSector('z2')">02. 8-BIT PCS</button>
+        <button class="pixel-btn pixel-btn-sm pixel-btn-accent" onclick="selectSector('z3')">03. ARCADE</button>
+        <button class="pixel-btn pixel-btn-sm" onclick="selectSector('z4')">04. MAGNETIC</button>
+        <button class="pixel-btn pixel-btn-sm pixel-btn-secondary" onclick="selectSector('z5')">05. PIONEER WOMEN</button>
+        <button class="pixel-btn pixel-btn-sm pixel-btn-accent" onclick="selectSector('z6')">06. WORKSHOP</button>
+      </div>
+
+      <div class="floor-map-wrapper">
+        <div class="floor-grid-visual">
+          <!-- Sector 1: Mainframes -->
+          <div class="map-zone" data-zone="z1" style="top: 20px; left: 20px; width: 170px; height: 100px;">
+            <span class="zone-name">SECTOR 01</span>
+            <span class="zone-desc">Mainframe Vault & Tubes</span>
+          </div>
+
+          <!-- Sector 2: Microcomputers -->
+          <div class="map-zone" data-zone="z2" style="top: 20px; left: 210px; width: 200px; height: 100px;">
+            <span class="zone-name">SECTOR 02</span>
+            <span class="zone-desc">8-Bit Microcomputer Lab</span>
+          </div>
+
+          <!-- Sector 3: Arcade Plaza -->
+          <div class="map-zone" data-zone="z3" style="top: 20px; right: 20px; width: 170px; height: 100px;">
+            <span class="zone-name">SECTOR 03</span>
+            <span class="zone-desc">Arcade & Console Plaza</span>
+          </div>
+
+          <!-- Sector 4: Magnetic Storage -->
+          <div class="map-zone" data-zone="z4" style="bottom: 20px; left: 20px; width: 170px; height: 120px;">
+            <span class="zone-name">SECTOR 04</span>
+            <span class="zone-desc">Magnetic Media & Telecom</span>
+          </div>
+
+          <!-- Sector 5: Pioneer Women in Tech -->
+          <div class="map-zone" data-zone="z5" style="bottom: 20px; left: 210px; width: 200px; height: 120px; border-color: var(--secondary);">
+            <span class="zone-name" style="color: var(--secondary);">SECTOR 05</span>
+            <span class="zone-desc">Pioneer Women Hall (Ada / Grace)</span>
+          </div>
+
+          <!-- Sector 6: Workshop -->
+          <div class="map-zone" data-zone="z6" style="bottom: 20px; right: 20px; width: 170px; height: 120px;">
+            <span class="zone-name">SECTOR 06</span>
+            <span class="zone-desc">Solder Lab & Byte Café</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sector info display box -->
+      <div id="map-zone-info" style="margin-top: 20px;">
+        <div class="pixel-box">
+          <p style="font-family: var(--font-tech); font-size: 1rem; color: var(--text-muted);">
+            ◄ Click any zone above (Sector 01 to 06) to inspect curator notes and equipment schedules.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. Visitor Guestbook -->
+    <section id="guestbook" style="margin-bottom: 60px;">
+      <div class="section-header">
+        <div>
+          <span class="pixel-badge pixel-badge-yellow">VISITOR LOGBOOK</span>
+          <h2 class="section-title">COMMUNITY GUESTBOOK</h2>
+          <p class="section-subtitle">Leave your transmission for future explorers. Saved locally to your terminal cache.</p>
+        </div>
+      </div>
+
+      <div style="display: grid; grid-template-columns: 1fr 1.3fr; gap: 30px;">
+        <!-- Guestbook Submission Form -->
+        <div class="pixel-box" style="border-color: var(--secondary);">
+          <h3 class="glow-text-pink" style="font-size: 1rem; margin-bottom: 16px;">SIGN THE GUESTBOOK</h3>
+          <form id="guestbook-form">
+            <div class="ticket-form-group">
+              <label class="ticket-form-label" for="guest-name">YOUR HANDLE / NAME:</label>
+              <input type="text" id="guest-name" class="pixel-input" placeholder="e.g. PixelPioneer_Kandy" required maxlength="30">
+            </div>
+
+            <div class="ticket-form-group">
+              <label class="ticket-form-label" for="guest-message">MESSAGE TO THE ARCHIVE:</label>
+              <textarea id="guest-message" class="pixel-input" rows="4" placeholder="Share your favorite retro tech memory or exhibition feedback..." required maxlength="240"></textarea>
+            </div>
+
+            <button type="submit" class="pixel-btn pixel-btn-secondary" style="width: 100%;">
+              TRANSMIT LOG ENTRY ►
+            </button>
+          </form>
+        </div>
+
+        <!-- Guestbook Entries List -->
+        <div class="pixel-box" style="background: #090714;">
+          <h3 class="glow-text-cyan" style="font-size: 1rem; margin-bottom: 16px;">RECENT LOG TRANSMISSIONS</h3>
+          <div id="guestbook-entries" style="max-height: 380px; overflow-y: auto; padding-right: 6px;">
+            <!-- Rendered by js/visit.js -->
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. Practical Visiting Info & Admission Matrix -->
+    <section class="pixel-box" style="background: #120e29; border-color: var(--primary);">
+      <h3 class="glow-text-cyan" style="font-size: 1.1rem; margin-bottom: 16px;">HOURS & ARCHIVE ADMISSION</h3>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 24px; font-family: var(--font-tech); font-size: 1rem;">
+        <div>
+          <strong style="color: var(--accent); font-family: var(--font-pixel); font-size: 0.7rem; display: block; margin-bottom: 6px;">
+            📍 LOCATION
+          </strong>
+          <p>Heritage Tech Pavilion</p>
+          <p>Kandy, Central Province, Sri Lanka</p>
+          <p style="color: var(--text-dim); margin-top: 4px;">Public Computing & Educational Archive</p>
+        </div>
+
+        <div>
+          <strong style="color: var(--secondary); font-family: var(--font-pixel); font-size: 0.7rem; display: block; margin-bottom: 6px;">
+            🕒 OPERATING HOURS
+          </strong>
+          <p>Tuesday – Friday: 09:00 - 17:00</p>
+          <p>Saturday – Sunday: 10:00 - 19:00</p>
+          <p style="color: #ffaa00;">Mondays: Hardware Maintenance & Soldering</p>
+        </div>
+
+        <div>
+          <strong style="color: var(--primary); font-family: var(--font-pixel); font-size: 0.7rem; display: block; margin-bottom: 6px;">
+            🎟 TICKET RATES
+          </strong>
+          <p>School Students (with ID): FREE</p>
+          <p>General Public: 500 LKR</p>
+          <p>Hands-on Arcade Pass: Included</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Global Retro Footer -->
+  <footer class="retro-footer">
+    <div class="footer-container">
+      <div class="footer-col">
+        <h4 class="glow-text-cyan">RETRO TECH MUSEUM</h4>
+        <p style="font-size: 0.95rem; color: var(--text-muted); margin-bottom: 16px;">
+          Bringing vintage engineering alive for scholars, dreamers, and makers.
+        </p>
+        <span class="school-tribute-badge">Official Digital Tech Archive</span>
+      </div>
+
+      <div class="footer-col">
+        <h4>NAVIGATION</h4>
+        <ul class="footer-links">
+          <li><a href="index.html">► Museum Lobby</a></li>
+          <li><a href="exhibits.html">► Silicon Exhibits</a></li>
+          <li><a href="arcade.html">► 1984 Arcade & DOS</a></li>
+          <li><a href="visit.html">► Tickets & Floor Map</a></li>
+          <li><a href="about.html">► Pioneers & Quiz</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>COMMUNITY</h4>
+        <ul class="footer-links">
+          <li><a href="#tickets">► Custom Ticket Maker</a></li>
+          <li><a href="#floormap">► Floor Schematics</a></li>
+          <li><a href="#guestbook">► Read Transmissions</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>STAMP CERTIFICATE</h4>
+        <div style="background: #000; border: 2px solid var(--border-dark); padding: 12px; font-family: var(--font-terminal); font-size: 1.15rem; color: #ffe600;">
+          <p>DISPATCH: KANDY NODE</p>
+          <p>VERIFICATION: SHA-256 VALID</p>
+          <p>STATUS: TICKETING ONLINE</p>
+          <p>ALL PASSENGERS WELCOME</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div>&copy; 1984 - 2026 Retro Tech Museum Archive. All rights reserved.</div>
+      <div>Preserving the tactile history of the digital age.</div>
+    </div>
+  </footer>
+
+  <script src="js/audio.js"></script>
+  <script src="js/common.js"></script>
+  <script src="js/visit.js"></script>
+</body>
+</html>

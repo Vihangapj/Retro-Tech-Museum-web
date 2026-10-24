@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Retro Tech Museum | Preserving 8-Bit, Silicon & Computing Heritage</title>
+  <meta name="description" content="Step into the golden age of computing. Explore vintage microcomputers, arcade consoles, magnetic media, and the pioneering women who shaped software history.">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <!-- CRT Scanline & Phosphor Overlay (Toggleable) -->
+  <div id="crt-overlay" aria-hidden="true"></div>
+
+  <!-- Perspective Horizon Grid Line -->
+  <div class="cyber-horizon" aria-hidden="true"></div>
+
+  <!-- Top Realtime Vintage Ticker -->
+  <div class="retro-ticker-bar">
+    <div class="ticker-content">
+      <span class="ticker-tag">LIVE FEED</span>
+      <span>★ WELCOME TO THE RETRO TECH MUSEUM ★ EXHIBIT HIGHLIGHT: COMMODORE 64 & APPLE IIe RUNNING ORIGINAL HARDWARE ★ SPECIAL TRIBUTE: WOMEN IN COMPUTING - ADA LOVELACE & GRACE HOPPER ★ PRESERVING SILICON HISTORY ★ STATUS: SYSTEM ONLINE 640K RAM OK ★</span>
+    </div>
+  </div>
+
+  <!-- Global Retro Navigation Bar -->
+  <header class="retro-header">
+    <div class="nav-container">
+      <a href="index.html" class="retro-logo">
+        <div class="logo-icon">
+          <!-- Pixel Floppy/Monitor SVG Icon -->
+          <svg viewBox="0 0 24 24">
+            <path d="M4 2h13l3 3v15H4V2zm2 2v6h10V4H6zm0 10v6h12v-6H6zm2 2h8v2H8v-2z"/>
+          </svg>
+        </div>
+        <div class="logo-text">
+          <span class="logo-title">RETRO<span>TECH</span></span>
+          <span class="logo-subtitle">MUSEUM ARCHIVE</span>
+        </div>
+      </a>
+
+      <!-- Desktop & Mobile Nav Menu -->
+      <nav>
+        <ul class="nav-menu">
+          <li class="nav-item"><a href="index.html" class="active">LOBBY</a></li>
+          <li class="nav-item"><a href="exhibits.html">EXHIBITS</a></li>
+          <li class="nav-item"><a href="arcade.html">ARCADE & DOS</a></li>
+          <li class="nav-item"><a href="visit.html">VISIT & TICKETS</a></li>
+          <li class="nav-item"><a href="about.html">ABOUT & QUIZ</a></li>
+        </ul>
+      </nav>
+
+      <!-- Hardware & Shader Controls -->
+      <div class="header-controls">
+        <button id="btn-toggle-theme" class="ctrl-btn" title="Cycle Retro Color Palettes">
+          🎨 <span id="current-theme-label">CYBER 1984</span>
+        </button>
+        <button id="btn-toggle-crt" class="ctrl-btn active" title="Toggle CRT Scanline Shader">
+          📺 CRT: ON
+        </button>
+        <button id="btn-toggle-sfx" class="ctrl-btn active" title="Toggle 8-Bit Audio Effects">
+          🔊 SFX: ON
+        </button>
+        <button class="mobile-toggle" aria-label="Toggle navigation menu">
+          ☰
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Lobby Page Content -->
+  <main class="page-container">
+    <!-- Hero Section -->
+    <section class="hero-section">
+      <div class="hero-content">
+        <div class="hero-badge-wrap">
+          <span class="pixel-badge">EST. 1984</span>
+          <span class="pixel-badge pixel-badge-pink">PRESERVATION ARCHIVE</span>
+          <span class="pixel-badge pixel-badge-yellow" id="retro-live-clock">--:--:-- RTC</span>
+        </div>
+
+        <h1 class="hero-title glow-text-cyan">
+          THE GOLDEN AGE OF COMPUTING LIVES HERE.
+        </h1>
+
+        <p class="hero-desc">
+          Immerse yourself in authentic silicon history. Experience the tactile clack of mechanical keyboards, the hypnotic scanlines of CRT monitors, and the revolutionary hardware that propelled humanity from punch cards to cyberspace.
+        </p>
+
+        <div class="hero-actions">
+          <a href="exhibits.html" class="pixel-btn">
+            ⚡ EXPLORE ARTIFACTS
+          </a>
+          <a href="arcade.html" class="pixel-btn pixel-btn-secondary">
+            🕹 PLAY 1984 ARCADE
+          </a>
+          <a href="visit.html" class="pixel-btn pixel-btn-accent">
+            🎟 GET 8-BIT TICKET
+          </a>
+        </div>
+      </div>
+
+      <!-- Hero CRT Computer Monitor Visualizer -->
+      <div class="hero-visual">
+        <div class="retro-pc-case">
+          <div class="retro-screen-bezel">
+            <div class="retro-screen-inner">
+              <div class="screen-glare"></div>
+              <div>
+                <p style="color: #ffaa00; margin-bottom: 4px;">*** RETRO TECH MUSEUM OS V1.0 ***</p>
+                <p>64K RAM SYSTEM  38911 BYTES FREE</p>
+                <p style="color: #33ff33; margin-top: 8px;">READY.</p>
+                <p style="color: #00ffff; margin-top: 4px;">LOAD "EXHIBIT_TOUR",8,1</p>
+                <p style="color: #ff3399; margin-top: 4px;">SEARCHING FOR SILICON PIONEERS...</p>
+                <p style="color: #33ff33; margin-top: 4px;">LOADING COMPLETE.</p>
+                <p style="color: #ffff00; margin-top: 6px;">RUN</p>
+              </div>
+              <div style="display: flex; justify-content: space-between; align-items: flex-end;">
+                <span style="font-size: 0.9rem; color: #888;">SILICON_HERITAGE_ARCHIVE</span>
+                <span style="animation: driveActivity 1s infinite; font-size: 1.4rem;">█</span>
+              </div>
+            </div>
+          </div>
+          <div class="floppy-drive-slot">
+            <div class="drive-bay"></div>
+            <span class="drive-badge-text">5.25" FLOPPY A:</span>
+            <div class="drive-led"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Museum Vital Stats Banner -->
+    <section class="museum-stats-strip">
+      <div class="pixel-box stat-card">
+        <span class="stat-value">120+</span>
+        <span class="stat-label">Restored Vintage Machines</span>
+      </div>
+      <div class="pixel-box stat-card">
+        <span class="stat-value">1.44 MB</span>
+        <span class="stat-label">Maximum Floppy Storage</span>
+      </div>
+      <div class="pixel-box stat-card">
+        <span class="stat-value">1.02 MHz</span>
+        <span class="stat-label">Average CPU Clock Speed</span>
+      </div>
+      <div class="pixel-box stat-card">
+        <span class="stat-value" id="live-visitor-count">0142858</span>
+        <span class="stat-label">Enthusiasts Online Today</span>
+      </div>
+    </section>
+
+    <!-- Native Synthesizer Audio Deck Component -->
+    <section class="retro-audio-deck">
+      <div class="audio-info">
+        <div class="cassette-spool" title="Audio Reel"></div>
+        <div>
+          <div class="audio-title">8-BIT SYNTHESIZER AUDIO LAB</div>
+          <div class="audio-sub">Pure Web Audio Oscillator Chiptune</div>
+        </div>
+      </div>
+
+      <div class="audio-controls">
+        <button id="btn-toggle-bgm" class="pixel-btn pixel-btn-sm pixel-btn-accent">
+          ▶ PLAY 8-BIT BGM
+        </button>
+        <button class="pixel-btn pixel-btn-sm" onclick="if(window.retroAudio) window.retroAudio.playBootChime()">
+          🔔 CHIME
+        </button>
+        <button class="pixel-btn pixel-btn-sm pixel-btn-secondary" onclick="if(window.retroAudio) window.retroAudio.playDiskSeek()">
+          💾 FLOPPY SEEK
+        </button>
+      </div>
+    </section>
+
+    <!-- Highlighted Artifacts Showcase -->
+    <section style="margin: 60px 0;">
+      <div class="section-header">
+        <div>
+          <h2 class="section-title">FEATURED SILICON RELICS</h2>
+          <p class="section-subtitle">Pivotal milestones that altered history forever</p>
+        </div>
+        <a href="exhibits.html" class="pixel-btn pixel-btn-sm pixel-btn-outline">VIEW ALL 9 ARTIFACTS ►</a>
+      </div>
+
+      <div class="exhibits-grid">
+        <!-- Card 1: Commodore 64 -->
+        <article class="pixel-box pixel-box-interactive exhibit-card">
+          <div class="exhibit-img-frame">
+            <span class="exhibit-year-pill">1982</span>
+            <span class="exhibit-category-tag">COMPUTERS</span>
+            <img src="images/c64.jpg" alt="Commodore 64 Real Artifact" class="exhibit-real-img" loading="lazy">
+          </div>
+          <h3 class="exhibit-title glow-text-cyan">Commodore 64</h3>
+          <div class="exhibit-meta">
+            <span>DEV: Commodore International</span>
+          </div>
+          <p class="exhibit-summary">The best-selling single computer in human history with over 17 million units sold. Packed with the iconic 3-voice SID synthesizer chip.</p>
+          <div class="exhibit-card-actions">
+            <a href="exhibits.html" class="pixel-btn pixel-btn-sm">INSPECT SPECIFICATIONS</a>
+          </div>
+        </article>
+
+        <!-- Card 2: Game Boy DMG-01 -->
+        <article class="pixel-box pixel-box-interactive exhibit-card">
+          <div class="exhibit-img-frame">
+            <span class="exhibit-year-pill">1989</span>
+            <span class="exhibit-category-tag">GAMING</span>
+            <img src="images/gameboy.jpg" alt="Game Boy DMG-01 Real Artifact" class="exhibit-real-img" loading="lazy">
+          </div>
+          <h3 class="exhibit-title glow-text-cyan">Game Boy (DMG-01)</h3>
+          <div class="exhibit-meta">
+            <span>DEV: Gunpei Yokoi & Nintendo</span>
+          </div>
+          <p class="exhibit-summary">Engineered with 4-shade olive green screen and 30-hour battery life. Bundled with Tetris, it sparked a global portable gaming revolution.</p>
+          <div class="exhibit-card-actions">
+            <a href="exhibits.html" class="pixel-btn pixel-btn-sm">INSPECT SPECIFICATIONS</a>
+          </div>
+        </article>
+
+        <!-- Card 3: Sony Walkman TPS-L2 -->
+        <article class="pixel-box pixel-box-interactive exhibit-card">
+          <div class="exhibit-img-frame">
+            <span class="exhibit-year-pill">1979</span>
+            <span class="exhibit-category-tag">AUDIO</span>
+            <img src="images/walkman.jpg" alt="Sony Walkman TPS-L2 Real Artifact" class="exhibit-real-img" loading="lazy">
+          </div>
+          <h3 class="exhibit-title glow-text-cyan">Sony Walkman TPS-L2</h3>
+          <div class="exhibit-meta">
+            <span>DEV: Nobutoshi Kihara & Sony</span>
+          </div>
+          <p class="exhibit-summary">The world's first portable stereo cassette player that gave people a personal soundtrack in public. Precursor to iPods and modern streaming.</p>
+          <div class="exhibit-card-actions">
+            <a href="exhibits.html" class="pixel-btn pixel-btn-sm">INSPECT SPECIFICATIONS</a>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- Pioneer Women in Tech Highlight -->
+    <section class="pixel-box pixel-box-pink" style="margin: 50px 0; background: #140d25;">
+      <div style="display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 30px; align-items: center;">
+        <div>
+          <span class="pixel-badge pixel-badge-yellow" style="margin-bottom: 12px;">SPECIAL TRIBUTE WING</span>
+          <h2 class="glow-text-pink" style="font-size: 1.5rem; margin-bottom: 14px;">WOMEN COMPUTING PIONEERS</h2>
+          <p style="font-family: var(--font-tech); font-size: 1.05rem; line-height: 1.6; margin-bottom: 20px; color: var(--text-main);">
+            Before silicon chips, visionary women wrote the mathematical foundations of software. Discover Ada Lovelace's first algorithm in 1843, Rear Admiral Grace Hopper's first English-language compiler, and Margaret Hamilton's Apollo 11 flight software.
+          </p>
+          <a href="about.html" class="pixel-btn pixel-btn-secondary">
+            VISIT PIONEER GALLERY & QUIZ ►
+          </a>
+        </div>
+        <div style="background: #000; border: 3px solid var(--secondary); padding: 18px; font-family: var(--font-terminal); font-size: 1.2rem; color: #ff007f;">
+          <p>/* APOLLO 11 GUIDANCE SOFTWARE */</p>
+          <p style="color: #ffe600;">DIR: MARGARET_HAMILTON</p>
+          <p style="color: #00ffcc;">YEAR: 1969</p>
+          <p style="color: #fff; margin-top: 10px;">"There was no second chance. We had to be right."</p>
+          <div style="margin-top: 15px; border-top: 1px dashed #444; padding-top: 10px; color: #888; font-size: 1rem;">
+            Empowering Future Leaders in Technology & Computing
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Global Retro Footer -->
+  <footer class="retro-footer">
+    <div class="footer-container">
+      <div class="footer-col">
+        <h4 class="glow-text-cyan">RETRO TECH MUSEUM</h4>
+        <p style="font-size: 0.95rem; color: var(--text-muted); margin-bottom: 16px; max-width: 380px;">
+          Preserving early personal computers, arcade electronics, and magnetic media to inspire future generations of computer scientists and software engineers.
+        </p>
+        <span class="school-tribute-badge">Official Digital Tech Archive</span>
+      </div>
+
+      <div class="footer-col">
+        <h4>NAVIGATION</h4>
+        <ul class="footer-links">
+          <li><a href="index.html">► Museum Lobby</a></li>
+          <li><a href="exhibits.html">► Silicon Exhibits</a></li>
+          <li><a href="arcade.html">► 1984 Arcade & DOS</a></li>
+          <li><a href="visit.html">► Tickets & Floor Map</a></li>
+          <li><a href="about.html">► Pioneers & Quiz</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>COMMUNITY</h4>
+        <ul class="footer-links">
+          <li><a href="visit.html#guestbook">► Sign Guestbook</a></li>
+          <li><a href="arcade.html#terminal">► DOS Terminal CLI</a></li>
+          <li><a href="about.html#quiz">► Tech Trivia Exam</a></li>
+          <li><a href="visit.html#tickets">► Generate Ticket</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>SYSTEM STATUS</h4>
+        <div style="background: #000; border: 2px solid var(--border-dark); padding: 12px; font-family: var(--font-terminal); font-size: 1.15rem; color: #33ff33;">
+          <p>CPU: MOS 6502 @ 1.02 MHz</p>
+          <p>MEMORY: 64KB OK</p>
+          <p>GRAPHICS: 16-COLOR PALETTE</p>
+          <p>AUDIO: 3-VOICE SID SYNTH</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div>&copy; 1984 - 2026 Retro Tech Museum Archive. All rights reserved.</div>
+      <div>Designed with authentic HTML/CSS/JS & Web Audio Synthesizer.</div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="js/audio.js"></script>
+  <script src="js/common.js"></script>
+</body>
+</html>

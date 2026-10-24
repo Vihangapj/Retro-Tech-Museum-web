@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <!-- Outer Bevel CRT / Floppy -->
+  <rect x="2" y="2" width="28" height="28" rx="2" fill="#0d0a1a" stroke="#00ffcc" stroke-width="2"/>
+  <!-- Inner CRT Screen -->
+  <rect x="6" y="6" width="20" height="15" rx="1" fill="#001a14" stroke="#33ff33" stroke-width="1"/>
+  <!-- Phosphor Green Glow Pixel / Prompt -->
+  <rect x="9" y="9" width="4" height="2" fill="#33ff33"/>
+  <rect x="9" y="13" width="7" height="2" fill="#00ffcc"/>
+  <rect x="9" y="17" width="3" height="2" fill="#ffe600"/>
+  <!-- Floppy Shutter / Monitor Stand -->
+  <rect x="12" y="23" width="8" height="3" fill="#ff007f"/>
+  <rect x="8" y="26" width="16" height="2" fill="#00ffcc"/>
+</svg>

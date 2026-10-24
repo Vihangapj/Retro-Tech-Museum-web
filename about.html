@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About Us, Pioneers in Tech & Pixel Quiz | Retro Tech Museum</title>
+  <meta name="description" content="Discover the museum story, celebrate the trailblazing women in computer science, and test your knowledge in our interactive 8-bit quiz.">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div id="crt-overlay" aria-hidden="true"></div>
+  <div class="cyber-horizon" aria-hidden="true"></div>
+
+  <!-- Top Realtime Ticker -->
+  <div class="retro-ticker-bar">
+    <div class="ticker-content">
+      <span class="ticker-tag">PIONEERS HALL</span>
+      <span>★ HONORING ADA LOVELACE ★ ADMIRAL GRACE HOPPER ★ MARGARET HAMILTON ★ RADIA PERLMAN ★ KATHERINE JOHNSON ★ TEST YOUR KNOWLEDGE IN THE 8-BIT EXAM ★</span>
+    </div>
+  </div>
+
+  <!-- Global Retro Navigation Bar -->
+  <header class="retro-header">
+    <div class="nav-container">
+      <a href="index.html" class="retro-logo">
+        <div class="logo-icon">
+          <svg viewBox="0 0 24 24">
+            <path d="M4 2h13l3 3v15H4V2zm2 2v6h10V4H6zm0 10v6h12v-6H6zm2 2h8v2H8v-2z"/>
+          </svg>
+        </div>
+        <div class="logo-text">
+          <span class="logo-title">RETRO<span>TECH</span></span>
+          <span class="logo-subtitle">MUSEUM ARCHIVE</span>
+        </div>
+      </a>
+
+      <nav>
+        <ul class="nav-menu">
+          <li class="nav-item"><a href="index.html">LOBBY</a></li>
+          <li class="nav-item"><a href="exhibits.html">EXHIBITS</a></li>
+          <li class="nav-item"><a href="arcade.html">ARCADE & DOS</a></li>
+          <li class="nav-item"><a href="visit.html">VISIT & TICKETS</a></li>
+          <li class="nav-item"><a href="about.html" class="active">ABOUT & QUIZ</a></li>
+        </ul>
+      </nav>
+
+      <div class="header-controls">
+        <button id="btn-toggle-theme" class="ctrl-btn" title="Cycle Retro Themes">
+          🎨 <span id="current-theme-label">CYBER 1984</span>
+        </button>
+        <button id="btn-toggle-crt" class="ctrl-btn active" title="Toggle CRT Scanline">
+          📺 CRT: ON
+        </button>
+        <button id="btn-toggle-sfx" class="ctrl-btn active" title="Toggle Sound Effects">
+          🔊 SFX: ON
+        </button>
+        <button class="mobile-toggle" aria-label="Toggle navigation menu">
+          ☰
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="page-container">
+    <!-- Header -->
+    <div class="section-header">
+      <div>
+        <span class="pixel-badge pixel-badge-pink" style="margin-bottom: 8px;">CURATORIAL MISSION</span>
+        <h1 class="section-title" style="font-size: 1.8rem;">THE ROOTS OF COMPUTING & PIONEERS</h1>
+        <p class="section-subtitle">Dedicated to the visionaries, coders, and electrical engineers who constructed our modern digital reality.</p>
+      </div>
+    </div>
+
+    <!-- Museum Origin & Curatorial Mission -->
+    <section class="pixel-box" style="margin-bottom: 60px; background: #0c091f; border-color: var(--secondary);">
+      <div style="display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 30px; align-items: center;">
+        <div>
+          <span class="pixel-badge pixel-badge-yellow" style="margin-bottom: 10px;">PRESERVATION & EDUCATION</span>
+          <h2 class="glow-text-cyan" style="font-size: 1.3rem; margin-bottom: 14px;">OUR CURATORIAL MISSION</h2>
+          <p style="font-family: var(--font-tech); font-size: 1.05rem; line-height: 1.6; margin-bottom: 14px; color: var(--text-main);">
+            The Retro Tech Museum is dedicated to documenting the rapid evolution of computation from the earliest mechanical algorithms to the portable microcomputers of the 1980s.
+          </p>
+          <p style="font-family: var(--font-tech); font-size: 1.05rem; line-height: 1.6; color: var(--text-muted);">
+            Our collection highlights the mathematical foundations laid by pioneering women in software, preserving both physical hardware and digital culture for future generations of creators and engineers.
+          </p>
+        </div>
+
+        <div style="background: #000; border: 3px solid var(--primary); padding: 20px; font-family: var(--font-terminal); font-size: 1.25rem;">
+          <p class="glow-text-pink">/* DIGITAL ARCHIVE PILLARS */</p>
+          <p style="color: #33ff33; margin-top: 6px;">CORE: Hardware Preservation & Restoration</p>
+          <p style="color: #ffe600; margin-top: 4px;">PURPOSE: Open STEAM Education & History</p>
+          <p style="color: #00ffcc; margin-top: 4px;">TECH STACK: 100% Native HTML5, CSS3, JS & Web Audio</p>
+          <div style="margin-top: 14px; border-top: 1px dashed #444; padding-top: 8px; color: #888; font-size: 0.95rem;">
+            "Inspiring the next generation of software architects."
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Pioneer Women in Computing Hall of Fame -->
+    <section style="margin-bottom: 70px;">
+      <div class="section-header">
+        <div>
+          <span class="pixel-badge pixel-badge-yellow">HALL OF HONOR</span>
+          <h2 class="section-title">WOMEN WHO ARCHITECTED SOFTWARE</h2>
+          <p class="section-subtitle">The foundational minds who invented programming, created compilers, and guided spacecraft to the moon.</p>
+        </div>
+      </div>
+
+      <div class="exhibits-grid">
+        <!-- Pioneer 1: Ada Lovelace -->
+        <article class="pixel-box pioneer-card">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px;">
+            <span class="pixel-badge pixel-badge-yellow">1815 - 1852</span>
+            <span style="font-family: var(--font-pixel-condensed); font-size: 0.75rem; color: var(--secondary);">FIRST PROGRAMMER</span>
+          </div>
+          <h3 class="glow-text-cyan" style="font-size: 1.15rem; margin-bottom: 8px;">ADA LOVELACE</h3>
+          <p style="color: var(--accent); font-family: var(--font-pixel-condensed); font-size: 0.8rem; margin-bottom: 14px;">
+            Mathematician & Computer Visionary
+          </p>
+          <p style="font-family: var(--font-tech); font-size: 0.95rem; line-height: 1.5; color: var(--text-muted); margin-bottom: 16px;">
+            In 1843, while translating notes on Charles Babbage's mechanical Analytical Engine, Lovelace wrote the world’s very first algorithm intended to calculate Bernoulli numbers. She foresaw that computers could compose music and manipulate graphics.
+          </p>
+          <div style="background: #000; padding: 10px; border-left: 3px solid var(--primary); font-family: var(--font-tech); font-size: 0.9rem; font-style: italic;">
+            "The Analytical Engine weaves algebraic patterns just as the Jacquard loom weaves flowers and leaves."
+          </div>
+        </article>
+
+        <!-- Pioneer 2: Grace Hopper -->
+        <article class="pixel-box pioneer-card">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px;">
+            <span class="pixel-badge pixel-badge-pink">1906 - 1992</span>
+            <span style="font-family: var(--font-pixel-condensed); font-size: 0.75rem; color: var(--primary);">MOTHER OF COMPILERS</span>
+          </div>
+          <h3 class="glow-text-pink" style="font-size: 1.15rem; margin-bottom: 8px;">REAR ADMIRAL GRACE HOPPER</h3>
+          <p style="color: var(--accent); font-family: var(--font-pixel-condensed); font-size: 0.8rem; margin-bottom: 14px;">
+            US Navy Admiral & Computer Scientist
+          </p>
+          <p style="font-family: var(--font-tech); font-size: 0.95rem; line-height: 1.5; color: var(--text-muted); margin-bottom: 16px;">
+            Pioneered the A-0 compiler in 1952, proving that programmers could write instructions in English instead of raw machine numbers. Her inventions formed the cornerstone of COBOL. She famously taped the first real "computer bug" (a moth) into her logbook.
+          </p>
+          <div style="background: #000; padding: 10px; border-left: 3px solid var(--secondary); font-family: var(--font-tech); font-size: 0.9rem; font-style: italic;">
+            "It's easier to ask forgiveness than it is to get permission."
+          </div>
+        </article>
+
+        <!-- Pioneer 3: Margaret Hamilton -->
+        <article class="pixel-box pioneer-card">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px;">
+            <span class="pixel-badge pixel-badge-yellow">1936 - PRESENT</span>
+            <span style="font-family: var(--font-pixel-condensed); font-size: 0.75rem; color: var(--accent);">APOLLO FLIGHT DIRECTOR</span>
+          </div>
+          <h3 class="glow-text-yellow" style="font-size: 1.15rem; margin-bottom: 8px;">MARGARET HAMILTON</h3>
+          <p style="color: var(--primary); font-family: var(--font-pixel-condensed); font-size: 0.8rem; margin-bottom: 14px;">
+            Director of MIT Software Engineering
+          </p>
+          <p style="font-family: var(--font-tech); font-size: 0.95rem; line-height: 1.5; color: var(--text-muted); margin-bottom: 16px;">
+            Led the MIT team that developed the on-board flight software for NASA’s Apollo 11 mission. Coined the phrase "Software Engineering" to demand that code development receive the same rigorous engineering respect as hardware.
+          </p>
+          <div style="background: #000; padding: 10px; border-left: 3px solid var(--accent); font-family: var(--font-tech); font-size: 0.9rem; font-style: italic;">
+            "There was no second chance. We had to be right."
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- Interactive Retro Tech & Pioneer Quiz Section -->
+    <section id="quiz" style="margin-bottom: 70px;">
+      <div class="section-header">
+        <div>
+          <span class="pixel-badge pixel-badge-yellow">KNOWLEDGE BENCHMARK</span>
+          <h2 class="section-title">THE 8-BIT RETRO TECH QUIZ</h2>
+          <p class="section-subtitle">Test your grasp of vintage microcomputing and pioneer history to unlock your certified curator rating!</p>
+        </div>
+      </div>
+
+      <div id="pixel-quiz-container" style="max-width: 720px; margin: 0 auto;">
+        <!-- Injected dynamically by js/about.js -->
+      </div>
+    </section>
+
+    <!-- Historical Timeline Track -->
+    <section style="margin-bottom: 60px;">
+      <div class="section-header">
+        <div>
+          <span class="pixel-badge pixel-badge-cyan">CHRONOLOGY</span>
+          <h2 class="section-title">TIMELINE OF COMPUTATIONAL BREAKTHROUGHS</h2>
+          <p class="section-subtitle">From analytical cogs to the pocket microcomputers of the late 80s.</p>
+        </div>
+      </div>
+
+      <div class="timeline-track">
+        <div class="timeline-item">
+          <div class="timeline-marker"></div>
+          <div class="timeline-content">
+            <div class="timeline-year">1843: THE FIRST PROGRAM</div>
+            <h4 class="glow-text-cyan" style="font-size: 0.95rem; margin-bottom: 6px;">Ada Lovelace Writes Bernoulli Algorithm</h4>
+            <p style="font-family: var(--font-tech); color: var(--text-muted); font-size: 0.95rem;">
+              Ada Lovelace publishes notes describing step-by-step conditional looping on Charles Babbage's Analytical Engine, establishing the concept of software.
+            </p>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-marker"></div>
+          <div class="timeline-content">
+            <div class="timeline-year">1952: THE FIRST COMPILER</div>
+            <h4 class="glow-text-pink" style="font-size: 0.95rem; margin-bottom: 6px;">Grace Hopper Introduces the A-0 System</h4>
+            <p style="font-family: var(--font-tech); color: var(--text-muted); font-size: 0.95rem;">
+              Grace Hopper constructs the earliest working compiler, translating symbolic mathematical code into binary machine language.
+            </p>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-marker"></div>
+          <div class="timeline-content">
+            <div class="timeline-year">1969: LUNAR LANDING SOFTWARE</div>
+            <h4 class="glow-text-yellow" style="font-size: 0.95rem; margin-bottom: 6px;">Margaret Hamilton's Priority Flight Core</h4>
+            <p style="font-family: var(--font-tech); color: var(--text-muted); font-size: 0.95rem;">
+              The Apollo 11 Lunar Module lands safely after Hamilton's priority-steered software intelligently sheds overloaded radar tasks while keeping thrust control active.
+            </p>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-marker"></div>
+          <div class="timeline-content">
+            <div class="timeline-year">1977 - 1982: THE 8-BIT MICRO REVOLUTION</div>
+            <h4 class="glow-text-cyan" style="font-size: 0.95rem; margin-bottom: 6px;">Apple II & Commodore 64 Take Over the World</h4>
+            <p style="font-family: var(--font-tech); color: var(--text-muted); font-size: 0.95rem;">
+              Personal computers arrive in bedrooms and school classrooms with color displays, cassette tape loading, and accessible BASIC interpreters.
+            </p>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-marker"></div>
+          <div class="timeline-content">
+            <div class="timeline-year">1989: POCKET SILICON</div>
+            <h4 class="glow-text-pink" style="font-size: 0.95rem; margin-bottom: 6px;">Game Boy DMG-01 Redefines Portability</h4>
+            <p style="font-family: var(--font-tech); color: var(--text-muted); font-size: 0.95rem;">
+              Nintendo combines the power of the Z80 microprocessor with low-power reflective LCD technology, democratizing portable digital entertainment.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Global Retro Footer -->
+  <footer class="retro-footer">
+    <div class="footer-container">
+      <div class="footer-col">
+        <h4 class="glow-text-cyan">RETRO TECH MUSEUM</h4>
+        <p style="font-size: 0.95rem; color: var(--text-muted); margin-bottom: 16px;">
+          Dedicated to preserving the intellectual legacy of computer engineering and programming pioneers.
+        </p>
+        <span class="school-tribute-badge">Official Digital Tech Archive</span>
+      </div>
+
+      <div class="footer-col">
+        <h4>NAVIGATION</h4>
+        <ul class="footer-links">
+          <li><a href="index.html">► Museum Lobby</a></li>
+          <li><a href="exhibits.html">► Silicon Exhibits</a></li>
+          <li><a href="arcade.html">► 1984 Arcade & DOS</a></li>
+          <li><a href="visit.html">► Tickets & Floor Map</a></li>
+          <li><a href="about.html">► Pioneers & Quiz</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>PIONEER ARCHIVE</h4>
+        <ul class="footer-links">
+          <li>► Ada Lovelace Notes (1843)</li>
+          <li>► Grace Hopper Compiler (1952)</li>
+          <li>► Apollo Flight System (1969)</li>
+          <li>► Radia Perlman Spanning Tree</li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>COMMENDATION</h4>
+        <div style="background: #000; border: 2px solid var(--border-dark); padding: 12px; font-family: var(--font-terminal); font-size: 1.15rem; color: #ff007f;">
+          <p>KANDY ICT EXCELLENCE</p>
+          <p>DEDICATED TO FUTURE WOMEN IN STEM</p>
+          <p>REMEMBER THE PIONEERS</p>
+          <p>CODE THE FUTURE</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div>&copy; 1984 - 2026 Retro Tech Museum Archive. All rights reserved.</div>
+      <div>Preserving the tactile history of the digital age.</div>
+    </div>
+  </footer>
+
+  <script src="js/audio.js"></script>
+  <script src="js/common.js"></script>
+  <script src="js/about.js"></script>
+</body>
+</html>

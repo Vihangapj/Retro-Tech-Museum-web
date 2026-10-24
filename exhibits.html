@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Exhibits & Artifacts Archive | Retro Tech Museum</title>
+  <meta name="description" content="Explore our extensive collection of historic computers, gaming consoles, telecommunication devices, and magnetic media storage from 1970 to 1995.">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .filter-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 24px;
+      align-items: center;
+    }
+    .filter-pill-btn {
+      font-family: var(--font-pixel);
+      font-size: 0.65rem;
+      padding: 10px 16px;
+      background: #000;
+      border: 2px solid var(--primary);
+      color: var(--primary);
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+    .filter-pill-btn:hover, .filter-pill-btn.active {
+      background: var(--primary);
+      color: #000;
+      box-shadow: 0 0 10px var(--primary-glow);
+    }
+    .search-wrap {
+      flex-grow: 1;
+      min-width: 260px;
+    }
+  </style>
+</head>
+<body>
+  <div id="crt-overlay" aria-hidden="true"></div>
+  <div class="cyber-horizon" aria-hidden="true"></div>
+
+  <!-- Top Realtime Ticker -->
+  <div class="retro-ticker-bar">
+    <div class="ticker-content">
+      <span class="ticker-tag">EXHIBIT ARCHIVE</span>
+      <span>★ COMMODORE 64 ★ APPLE IIe ★ IBM 5150 ★ GAME BOY DMG-01 ★ SONY WALKMAN TPS-L2 ★ MOTOROLA DYNATAC 8000X ★ HAYES SMARTMODEM 1200 ★ ALL HARDWARE BENCH TESTED & OPERATIONAL ★</span>
+    </div>
+  </div>
+
+  <!-- Global Retro Navigation Bar -->
+  <header class="retro-header">
+    <div class="nav-container">
+      <a href="index.html" class="retro-logo">
+        <div class="logo-icon">
+          <svg viewBox="0 0 24 24">
+            <path d="M4 2h13l3 3v15H4V2zm2 2v6h10V4H6zm0 10v6h12v-6H6zm2 2h8v2H8v-2z"/>
+          </svg>
+        </div>
+        <div class="logo-text">
+          <span class="logo-title">RETRO<span>TECH</span></span>
+          <span class="logo-subtitle">MUSEUM ARCHIVE</span>
+        </div>
+      </a>
+
+      <nav>
+        <ul class="nav-menu">
+          <li class="nav-item"><a href="index.html">LOBBY</a></li>
+          <li class="nav-item"><a href="exhibits.html" class="active">EXHIBITS</a></li>
+          <li class="nav-item"><a href="arcade.html">ARCADE & DOS</a></li>
+          <li class="nav-item"><a href="visit.html">VISIT & TICKETS</a></li>
+          <li class="nav-item"><a href="about.html">ABOUT & QUIZ</a></li>
+        </ul>
+      </nav>
+
+      <div class="header-controls">
+        <button id="btn-toggle-theme" class="ctrl-btn" title="Cycle Retro Themes">
+          🎨 <span id="current-theme-label">CYBER 1984</span>
+        </button>
+        <button id="btn-toggle-crt" class="ctrl-btn active" title="Toggle CRT Scanline">
+          📺 CRT: ON
+        </button>
+        <button id="btn-toggle-sfx" class="ctrl-btn active" title="Toggle Sound Effects">
+          🔊 SFX: ON
+        </button>
+        <button class="mobile-toggle" aria-label="Toggle navigation menu">
+          ☰
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="page-container">
+    <!-- Header Section -->
+    <div class="section-header" style="margin-top: 10px;">
+      <div>
+        <span class="pixel-badge pixel-badge-yellow" style="margin-bottom: 8px;">CATALOG OF SILICON WONDERS</span>
+        <h1 class="section-title" style="font-size: 1.8rem;">GRAND ARTIFACT EXHIBITION</h1>
+        <p class="section-subtitle">Browse restored historic devices, test hardware audio, and inspect architectural blueprints.</p>
+      </div>
+      <div>
+        <span class="pixel-badge pixel-badge-pink">TOTAL CATALOGED: 9 ARTIFACTS</span>
+      </div>
+    </div>
+
+    <!-- Filter & Search Controls Bar -->
+    <div class="filter-bar">
+      <button class="filter-pill-btn active" data-filter="all">ALL ARTIFACTS</button>
+      <button class="filter-pill-btn" data-filter="computers">💻 COMPUTERS</button>
+      <button class="filter-pill-btn" data-filter="gaming">🎮 GAMING CONSOLES</button>
+      <button class="filter-pill-btn" data-filter="audio">📼 AUDIO & STORAGE</button>
+      <button class="filter-pill-btn" data-filter="telecom">📡 TELECOM & MODEMS</button>
+
+      <div class="search-wrap">
+        <input 
+          type="text" 
+          id="artifact-search-input" 
+          class="pixel-input" 
+          placeholder="SEARCH BY NAME, YEAR, OR CREATOR..."
+          aria-label="Search Artifacts"
+        >
+      </div>
+    </div>
+
+    <!-- Dynamic Grid Container -->
+    <section class="exhibits-grid" id="exhibits-grid-container">
+      <!-- Populated via js/exhibits.js -->
+    </section>
+
+    <!-- Quick Audio Hardware Diagnostics Section -->
+    <section class="pixel-box" style="margin-top: 60px; background: #0f0b21; border-color: var(--accent);">
+      <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; margin-bottom: 16px;">
+        <div>
+          <span class="pixel-badge pixel-badge-yellow">AUDIO DIAGNOSTICS</span>
+          <h2 class="glow-text-yellow" style="font-size: 1.2rem; margin-top: 6px;">VINTAGE SOUND BENCH</h2>
+        </div>
+        <p style="color: var(--text-muted); font-size: 0.95rem; max-width: 450px;">
+          Experience the authentic acoustic signatures synthesized live with the browser's native Web Audio API oscillators.
+        </p>
+      </div>
+
+      <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+        <button class="pixel-btn pixel-btn-sm" onclick="triggerArtifactSound('floppy')">
+          💾 5.25" DISK SEEK
+        </button>
+        <button class="pixel-btn pixel-btn-sm pixel-btn-secondary" onclick="triggerArtifactSound('modem')">
+          📞 1200 BAUD MODEM SQUEAL
+        </button>
+        <button class="pixel-btn pixel-btn-sm pixel-btn-accent" onclick="triggerArtifactSound('boot')">
+          ⚡ IBM PC POST BEEP
+        </button>
+        <button class="pixel-btn pixel-btn-sm" onclick="triggerArtifactSound('c64')">
+          🎹 COMMODORE SID CHIME
+        </button>
+        <button class="pixel-btn pixel-btn-sm pixel-btn-outline" onclick="triggerArtifactSound('gameboy')">
+          🕹 GAME BOY COIN PING
+        </button>
+      </div>
+    </section>
+  </main>
+
+  <!-- Detailed Artifact Modal Dialog -->
+  <div class="pixel-modal-backdrop" id="artifact-detail-modal" role="dialog" aria-modal="true">
+    <div class="pixel-modal">
+      <button class="modal-close-btn" aria-label="Close modal">✕</button>
+      <div id="artifact-modal-body">
+        <!-- Injected dynamically by js/exhibits.js -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Global Retro Footer -->
+  <footer class="retro-footer">
+    <div class="footer-container">
+      <div class="footer-col">
+        <h4 class="glow-text-cyan">RETRO TECH MUSEUM</h4>
+        <p style="font-size: 0.95rem; color: var(--text-muted); margin-bottom: 16px;">
+          Dedicated to preserving the tactile engineering of 20th-century computation.
+        </p>
+        <span class="school-tribute-badge">Official Digital Tech Archive</span>
+      </div>
+
+      <div class="footer-col">
+        <h4>NAVIGATION</h4>
+        <ul class="footer-links">
+          <li><a href="index.html">► Museum Lobby</a></li>
+          <li><a href="exhibits.html">► Silicon Exhibits</a></li>
+          <li><a href="arcade.html">► 1984 Arcade & DOS</a></li>
+          <li><a href="visit.html">► Tickets & Floor Map</a></li>
+          <li><a href="about.html">► Pioneers & Quiz</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>EXHIBIT SECTORS</h4>
+        <ul class="footer-links">
+          <li><a href="#" onclick="document.querySelector('[data-filter=computers]').click(); return false;">► Home Microcomputers</a></li>
+          <li><a href="#" onclick="document.querySelector('[data-filter=gaming]').click(); return false;">► Video Game Consoles</a></li>
+          <li><a href="#" onclick="document.querySelector('[data-filter=audio]').click(); return false;">► Magnetic Cassettes</a></li>
+          <li><a href="#" onclick="document.querySelector('[data-filter=telecom]').click(); return false;">► Cellular & Modems</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>SYSTEM STATUS</h4>
+        <div style="background: #000; border: 2px solid var(--border-dark); padding: 12px; font-family: var(--font-terminal); font-size: 1.15rem; color: #33ff33;">
+          <p>STATUS: NORMAL</p>
+          <p>BUFFER: 640 KB OK</p>
+          <p>ARTIFACTS: 9 MOUNTED</p>
+          <p>DIAGNOSTICS: PASS</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div>&copy; 1984 - 2026 Retro Tech Museum Archive. All rights reserved.</div>
+      <div>Preserving the tactile history of the digital age.</div>
+    </div>
+  </footer>
+
+  <script src="js/audio.js"></script>
+  <script src="js/common.js"></script>
+  <script src="js/exhibits.js"></script>
+</body>
+</html>

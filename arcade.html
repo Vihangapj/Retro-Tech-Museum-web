@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Retro Arcade & DOS Terminal | Retro Tech Museum</title>
+  <meta name="description" content="Play the authentic 1984 Byte Defender retro arcade game and operate the vintage DOS command prompt terminal.">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .arcade-cabinet-wrapper {
+      max-width: 720px;
+      margin: 0 auto 50px;
+    }
+    .arcade-marquee {
+      background: #ff007f;
+      color: #fff;
+      font-family: var(--font-pixel);
+      text-align: center;
+      padding: 12px;
+      border: 6px solid #000;
+      box-shadow: 0 0 16px var(--secondary-glow);
+      font-size: 1.1rem;
+      letter-spacing: 2px;
+    }
+    .arcade-controls-pad {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #110e22;
+      border: 4px solid #000;
+      padding: 16px;
+      margin-top: 10px;
+    }
+    .dpad-btn-group {
+      display: flex;
+      gap: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div id="crt-overlay" aria-hidden="true"></div>
+  <div class="cyber-horizon" aria-hidden="true"></div>
+
+  <!-- Top Realtime Ticker -->
+  <div class="retro-ticker-bar">
+    <div class="ticker-content">
+      <span class="ticker-tag">ARCADE SECTOR</span>
+      <span>★ INSERT COIN TO PLAY ★ BYTE DEFENDER 1984 LOADED ★ TERMINAL C:\\ COMMAND PROMPT READY ★ TYPE 'HELP' IN TERMINAL TO DISCOVER HIDDEN ARCHIVES ★ CLASSIC 1984 EDITION ★</span>
+    </div>
+  </div>
+
+  <!-- Global Retro Navigation Bar -->
+  <header class="retro-header">
+    <div class="nav-container">
+      <a href="index.html" class="retro-logo">
+        <div class="logo-icon">
+          <svg viewBox="0 0 24 24">
+            <path d="M4 2h13l3 3v15H4V2zm2 2v6h10V4H6zm0 10v6h12v-6H6zm2 2h8v2H8v-2z"/>
+          </svg>
+        </div>
+        <div class="logo-text">
+          <span class="logo-title">RETRO<span>TECH</span></span>
+          <span class="logo-subtitle">MUSEUM ARCHIVE</span>
+        </div>
+      </a>
+
+      <nav>
+        <ul class="nav-menu">
+          <li class="nav-item"><a href="index.html">LOBBY</a></li>
+          <li class="nav-item"><a href="exhibits.html">EXHIBITS</a></li>
+          <li class="nav-item"><a href="arcade.html" class="active">ARCADE & DOS</a></li>
+          <li class="nav-item"><a href="visit.html">VISIT & TICKETS</a></li>
+          <li class="nav-item"><a href="about.html">ABOUT & QUIZ</a></li>
+        </ul>
+      </nav>
+
+      <div class="header-controls">
+        <button id="btn-toggle-theme" class="ctrl-btn" title="Cycle Retro Themes">
+          🎨 <span id="current-theme-label">CYBER 1984</span>
+        </button>
+        <button id="btn-toggle-crt" class="ctrl-btn active" title="Toggle CRT Scanline">
+          📺 CRT: ON
+        </button>
+        <button id="btn-toggle-sfx" class="ctrl-btn active" title="Toggle Sound Effects">
+          🔊 SFX: ON
+        </button>
+        <button class="mobile-toggle" aria-label="Toggle navigation menu">
+          ☰
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="page-container">
+    <!-- Header -->
+    <div class="section-header">
+      <div>
+        <span class="pixel-badge pixel-badge-yellow" style="margin-bottom: 8px;">INTERACTIVE TIME MACHINE</span>
+        <h1 class="section-title" style="font-size: 1.8rem;">PLAYABLE RETRO ARCADE & DOS</h1>
+        <p class="section-subtitle">Original 8-bit Canvas video game and interactive MS-DOS/Commodore command line terminal.</p>
+      </div>
+    </div>
+
+    <!-- 1. Playable Arcade Machine -->
+    <section class="arcade-cabinet-wrapper">
+      <div class="arcade-marquee">
+        ★ BYTE DEFENDER 1984 ★
+      </div>
+
+      <div class="arcade-viewport-frame">
+        <div class="arcade-dashboard">
+          <div>SCORE: <span id="arcade-score-val" style="color: var(--primary);">00000</span></div>
+          <div>HI-SCORE: <span id="arcade-hiscore-val" style="color: var(--accent);">01984</span></div>
+          <div>WAVE: <span id="arcade-wave-val" style="color: #fff;">1</span></div>
+          <div>LIVES: <span id="arcade-lives-val" style="color: var(--secondary);">♥♥♥</span></div>
+        </div>
+
+        <!-- Canvas Game -->
+        <canvas id="arcadeCanvas" width="640" height="400"></canvas>
+
+        <!-- Onscreen Controls for Mobile & Tablet -->
+        <div class="arcade-controls-pad" style="width: 100%; max-width: 640px;">
+          <div class="dpad-btn-group">
+            <button id="arcade-btn-left" class="pixel-btn pixel-btn-sm" aria-label="Move Ship Left">
+              ◀ LEFT
+            </button>
+            <button id="arcade-btn-right" class="pixel-btn pixel-btn-sm" aria-label="Move Ship Right">
+              RIGHT ▶
+            </button>
+          </div>
+          <div class="dpad-btn-group">
+            <button id="arcade-btn-fire" class="pixel-btn pixel-btn-sm pixel-btn-secondary" aria-label="Shoot Laser">
+              🔥 FIRE LASER
+            </button>
+            <button id="arcade-btn-start" class="pixel-btn pixel-btn-sm pixel-btn-accent" aria-label="Insert Coin / Start">
+              🪙 START / COIN
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="pixel-box" style="margin-top: 14px; padding: 12px 18px; font-family: var(--font-tech); font-size: 0.95rem; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 10px;">
+        <div><strong>CONTROLS:</strong> [A / D] or [◄ / ► ARROWS] to steer | [SPACEBAR] to blast lasers</div>
+        <div style="color: var(--accent);">NATIVE 2D CANVAS ENGINE & WEB AUDIO</div>
+      </div>
+    </section>
+
+    <!-- 2. Vintage DOS Terminal Emulator -->
+    <section id="terminal" style="margin-top: 60px;">
+      <div class="section-header">
+        <div>
+          <span class="pixel-badge pixel-badge-pink">AUTHENTIC CLI ENVIRONMENT</span>
+          <h2 class="section-title">VINTAGE 80s DOS TERMINAL</h2>
+          <p class="section-subtitle">Type retro commands directly into the prompt. Type 'HELP' to view all commands.</p>
+        </div>
+      </div>
+
+      <div class="dos-terminal-window">
+        <div class="terminal-header">
+          <span>RETRO-DOS VERSION 3.30 (C) 1984 RETRO TECH ARCHIVE</span>
+          <span>640K BASE RAM OK</span>
+        </div>
+
+        <div class="terminal-body" id="terminal-output-log">
+          <pre>RETRO TECH ARCHIVE BOOT SYSTEM [VERSION 3.30]
+Type 'HELP' to explore available commands and discover secret files.
+Try 'TYPE GIRLS_HIGH_SCHOOL_KANDY.TXT' to read the special exhibition tribute!
+</pre>
+        </div>
+
+        <div class="terminal-prompt-line">
+          <span style="color: var(--primary); font-size: 1.4rem;">C:\RETRO_TECH&gt;</span>
+          <input 
+            type="text" 
+            id="terminal-cli-input" 
+            class="terminal-input" 
+            placeholder="Type 'help' and press Enter..." 
+            autocomplete="off"
+            spellcheck="false"
+          >
+        </div>
+      </div>
+
+      <!-- Quick Command Buttons for Easy Clicking -->
+      <div style="margin-top: 14px; display: flex; gap: 8px; flex-wrap: wrap;">
+        <span style="font-family: var(--font-pixel); font-size: 0.65rem; color: var(--text-muted); align-self: center; margin-right: 6px;">QUICK COMMANDS:</span>
+        <button class="pixel-btn pixel-btn-sm pixel-btn-outline" onclick="document.getElementById('terminal-cli-input').value='help'; document.getElementById('terminal-cli-input').dispatchEvent(new KeyboardEvent('keydown', {'key':'Enter'}));">HELP</button>
+        <button class="pixel-btn pixel-btn-sm pixel-btn-outline" onclick="document.getElementById('terminal-cli-input').value='dir'; document.getElementById('terminal-cli-input').dispatchEvent(new KeyboardEvent('keydown', {'key':'Enter'}));">DIR</button>
+        <button class="pixel-btn pixel-btn-sm pixel-btn-outline" onclick="document.getElementById('terminal-cli-input').value='type archive_mission.txt'; document.getElementById('terminal-cli-input').dispatchEvent(new KeyboardEvent('keydown', {'key':'Enter'}));">TYPE MISSION.TXT</button>
+        <button class="pixel-btn pixel-btn-sm pixel-btn-outline" onclick="document.getElementById('terminal-cli-input').value='boot c64'; document.getElementById('terminal-cli-input').dispatchEvent(new KeyboardEvent('keydown', {'key':'Enter'}));">BOOT C64</button>
+        <button class="pixel-btn pixel-btn-sm pixel-btn-outline" onclick="document.getElementById('terminal-cli-input').value='matrix'; document.getElementById('terminal-cli-input').dispatchEvent(new KeyboardEvent('keydown', {'key':'Enter'}));">MATRIX</button>
+        <button class="pixel-btn pixel-btn-sm pixel-btn-outline" onclick="document.getElementById('terminal-cli-input').value='play'; document.getElementById('terminal-cli-input').dispatchEvent(new KeyboardEvent('keydown', {'key':'Enter'}));">PLAY</button>
+        <button class="pixel-btn pixel-btn-sm pixel-btn-outline" onclick="document.getElementById('terminal-cli-input').value='cls'; document.getElementById('terminal-cli-input').dispatchEvent(new KeyboardEvent('keydown', {'key':'Enter'}));">CLS</button>
+      </div>
+    </section>
+  </main>
+
+  <!-- Global Retro Footer -->
+  <footer class="retro-footer">
+    <div class="footer-container">
+      <div class="footer-col">
+        <h4 class="glow-text-cyan">RETRO TECH MUSEUM</h4>
+        <p style="font-size: 0.95rem; color: var(--text-muted); margin-bottom: 16px;">
+          Empowering the next generation of coders by celebrating where software and gaming started.
+        </p>
+        <span class="school-tribute-badge">Official Digital Tech Archive</span>
+      </div>
+
+      <div class="footer-col">
+        <h4>NAVIGATION</h4>
+        <ul class="footer-links">
+          <li><a href="index.html">► Museum Lobby</a></li>
+          <li><a href="exhibits.html">► Silicon Exhibits</a></li>
+          <li><a href="arcade.html">► 1984 Arcade & DOS</a></li>
+          <li><a href="visit.html">► Tickets & Floor Map</a></li>
+          <li><a href="about.html">► Pioneers & Quiz</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>ARCADE RULES</h4>
+        <ul class="footer-links">
+          <li>► No coin jamming</li>
+          <li>► Respect the cathode tubes</li>
+          <li>► High scores saved locally</li>
+          <li>► Konami Code honored</li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>TERMINAL SPECS</h4>
+        <div style="background: #000; border: 2px solid var(--border-dark); padding: 12px; font-family: var(--font-terminal); font-size: 1.15rem; color: #33ff33;">
+          <p>EMULATOR: MS-DOS 3.30</p>
+          <p>COMMAND PROCESSOR: COMMAND.COM</p>
+          <p>CONSOLE: VT100 ESCAPE SEQ</p>
+          <p>READY FOR INPUT</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div>&copy; 1984 - 2026 Retro Tech Museum Archive. All rights reserved.</div>
+      <div>Preserving the tactile history of the digital age.</div>
+    </div>
+  </footer>
+
+  <script src="js/audio.js"></script>
+  <script src="js/common.js"></script>
+  <script src="js/arcade.js"></script>
+</body>
+</html>
